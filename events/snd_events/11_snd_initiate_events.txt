@@ -7,6 +7,10 @@ snd_initiate_events.1001 { #Initiate demon
 		AND = {
 			#spn_has_supernatural_trait = no
 			spn_has_hunter_trait = no
+			NOR = {
+				has_trait = demon
+				has_trait = demon0
+			}
 			#is_witch_trigger = no
 		}
 	}
@@ -41,6 +45,10 @@ snd_initiate_events.1001 { #Initiate demon
 		else_if = {
 			limit = { has_character_flag = supernatural_embrace_vampire }
 			remove_character_flag = supernatural_embrace_vampire
+		}
+		else_if = {
+			limit = { has_trait = demon0 }
+			remove_trait = demon0
 		}
 
 		add_trait = demon
