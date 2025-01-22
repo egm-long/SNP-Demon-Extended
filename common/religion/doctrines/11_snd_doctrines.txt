@@ -1,0 +1,70 @@
+﻿snd_doctrine_demonism = {
+	group = "crimes"
+	snd_doctrine_demonism_crime = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = snd_doctrine_demonism_crime }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = snd_doctrine_demonism_accepted }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
+		parameters = {
+			snd_demonism_illegal = yes
+		}
+	}
+	snd_doctrine_demonism_shunned = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = snd_doctrine_demonism_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		parameters = {
+			snd_demonism_shunned = yes
+		}
+	}
+	snd_doctrine_demonism_accepted = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = snd_doctrine_demonism_accepted }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = snd_doctrine_demonism_crime }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
+		parameters = {
+			snd_demonism_accepted = yes
+		}
+	}
+	snd_doctrine_demonism_virtuous = {
+		piety_cost = {
+			value = faith_tenet_cost_massive
+			if = {
+				limit = { has_doctrine = snd_doctrine_demonism_virtuous }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = snd_doctrine_demonism_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			else_if = {
+				limit = { has_doctrine = snd_doctrine_demonism_crime }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
+		}
+		traits = {
+			virtues = { demon }
+		}
+		parameters = {
+			snd_demonism_accepted = yes
+		}
+	}
+}

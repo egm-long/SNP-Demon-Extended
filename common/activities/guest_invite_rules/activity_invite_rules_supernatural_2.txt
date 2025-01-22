@@ -1,0 +1,39 @@
+﻿activity_invite_rule_demons = {
+    effect = {
+        every_living_character = {
+            limit = {
+                is_adult = yes
+                is_imprisoned = no
+                has_trait = demon
+                OR = {
+                    any_relation = {
+                        type = lover
+                    }
+                    any_relation = {
+                        type = friend
+                    }
+                    any_close_family_member = {
+                        has_trait = demon
+                    }
+                }
+            }
+            add_to_list = characters
+        }
+    }
+}
+# Supernatural Players
+activity_invite_rule_supernatural_2_mp = {
+	effect = {
+		every_player = {
+			limit = {
+				is_imprisoned = no
+				OR = {
+					has_trait = supernatural_vampire
+					has_trait = supernatural_hybrid
+					has_trait = demon
+				}
+			}
+			add_to_list = characters
+		}
+	}
+}
