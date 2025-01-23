@@ -37,12 +37,8 @@
 		NOT = { scope:recipient = scope:actor}
 		scope:recipient = {
 			#spn_has_supernatural_trait = no
-			NOR = {
-				has_trait = demon
-				has_trait = demon0
-				has_trait = supernatural_hunter
-			}
-			#NOT = { has_trait = supernatural_hunter }
+			
+			NOT = { has_trait = supernatural_hunter }
 		}
 		scope:actor = {
 			OR = {
@@ -715,17 +711,7 @@ snd_ask_to_turn_into_demon = { #Ask Character to Turn You Into A Demon
 		NOT = { scope:recipient = scope:actor}
 		scope:actor = {
 			spn_has_supernatural_trait = no
-			NOR = {
-				has_trait = demon
-				has_trait = demon0
-				has_trait = supernatural_hunter
-			}
 			NOT = { has_trait = supernatural_hunter }
-		}
-		scope:recipient = {
-			OR = {
-				has_trait = demon
-			}
 		}
 	}
 

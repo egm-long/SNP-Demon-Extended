@@ -18,3 +18,17 @@
 	xp_per_level = 1000
 	base_xp_gain = 25
 }
+demon_lifestyle = {
+
+	is_highlighted = {
+		has_trait = demon	
+	}
+
+	is_valid = {
+		has_trait = demon
+	}
+	
+	xp_per_level = 1000
+	base_xp_gain = 50
+	background = d
+}

@@ -73,5 +73,4 @@ snd_ev1.23.f_tt:0 "You relieve them of a significant sum."
  rumors_of_demons_title:0 "[first.GetShortUIName|U] overheard there being rumors of Demons"
  expertise_demon_display_title:0 "[first.GetShortUIName|U] is impressed by the Host's skills."
 
- building_type_demon_castle:0 "The Castle of Demons"
- building_type_demon_castle_desc:0 "The Castle of Demons is a place of dark power and malevolent intent. The very walls seem to pulse with the energy of the abyss, and the air is thick with the scent of brimstone. The castle is home to a host of demonic creatures, each more terrifying than the last. The castle's inhabitants are fiercely
+ demon_castle_title:0 "The Castle of Demons"
