@@ -1,0 +1,19 @@
+﻿demon_recently_fed_modifier = {
+    icon = blood_positive
+	intrigue = 3
+	diplomacy = 3
+	learning = 3
+	stewardship = 1
+	prowess = 5
+	attraction_opinion = 10
+}
+
+demon_recently_fed_on_modifier = {
+    icon = blood_negative
+	intrigue = -1
+	diplomacy = -1
+	learning = -3
+	stewardship = -1
+	prowess = -3
+	attraction_opinion = -5
+}

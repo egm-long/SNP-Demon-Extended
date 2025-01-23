@@ -1,0 +1,70 @@
+﻿namespace = snd_initiate_events
+
+snd_initiate_events.1001 { #Initiate demon
+	hidden = yes
+
+	trigger = {
+		AND = {
+			#spn_has_supernatural_trait = no
+			spn_has_hunter_trait = no
+			#is_witch_trigger = no
+		}
+	}
+
+	immediate = { 
+		#Apply Genetic Trait from Decision
+		#if = {
+			#limit = { has_character_flag = supernatural_embrace_werewolf }
+		#	add_trait = supernatural_werewolf
+			#remove_character_flag = supernatural_embrace_werewolf
+		#}
+		#else = {
+		#	add_trait = demon
+		#}
+
+		if = {
+			limit = { has_trait = supernatural_werewolf }
+			remove_trait = supernatural_werewolf
+		}
+		else_if = {
+			limit = { has_trait = supernatural_vampire }
+			remove_trait = supernatural_vampire
+		}
+		else_if = {
+			limit = { has_trait = supernatural_hybrid }
+			remove_trait = supernatural_hybrid
+		}
+		else_if = {
+			limit = { has_character_flag = supernatural_embrace_werewolf }
+			remove_character_flag = supernatural_embrace_werewolf
+		}
+		else_if = {
+			limit = { has_character_flag = supernatural_embrace_vampire }
+			remove_character_flag = supernatural_embrace_vampire
+		}
+
+		add_trait = demon
+
+		set_variable = {
+			name = spn_age_aquired_immortality
+			value = 22
+		}
+
+		if = {
+			limit = { has_treatable_disease_trigger = yes }
+			spn_remove_treatable_disease = yes
+		}
+		add_character_flag = {
+			flag = immune_to_disease
+		}
+
+		#spn_give_lycan_secret_or_trait_effect = yes
+
+		#add_character_flag = {
+		#	flag = spn_recently_became_lycan
+		#	days = 1
+		#}
+
+		#spn_track_current_visual_age = { VISUALAGE = age }
+	}
+}

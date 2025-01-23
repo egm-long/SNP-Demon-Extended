@@ -1,0 +1,26 @@
+﻿snd_assign_all_religions_immortal_doctrines = {
+	effect = {
+		every_religion_global = {
+			limit = {
+				is_in_family = rf_pagan
+			}
+			every_faith = {
+				if = {
+					limit = { NOT = { has_doctrine = snd_doctrine_demonism_shunned } }
+					add_doctrine = snd_doctrine_demonism_shunned
+				}
+			}
+		}
+		every_religion_global = {
+			limit = {
+				NOT = { is_in_family = rf_pagan }
+			}
+			every_faith = {
+				if = {
+					limit = { NOT = { has_doctrine = snd_doctrine_demonism_crime } }
+					add_doctrine = snd_doctrine_demonism_crime
+				}
+			}
+		}
+	}
+}

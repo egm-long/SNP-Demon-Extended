@@ -1,0 +1,820 @@
+﻿namespace = snd_ev1
+
+
+snd_ev1.08 = {
+	type = activity_event
+	title = snd_ev1.08.title
+	desc = snd_ev1.08.desc
+	theme = intrigue
+	override_background = {
+		reference = bp1_wine_cellar
+	}
+	
+	left_portrait = {
+		character = root
+		animation = disbelief
+	}
+	center_portrait = {
+		character = scope:local_courtier
+		animation = pain
+	}
+	right_portrait = {
+		character = scope:vampire0
+		animation = shock
+	}
+	
+	trigger = {
+		is_alive = yes
+		exists = scope:activity
+		scope:activity = {
+			any_attending_character = {
+				NOT = {
+					THIS=ROOT
+					has_trait = demon
+					has_trait = supernatural_vampire
+					has_trait = supernatural_hybrid
+				}
+			}
+		}
+	}
+	
+	immediate = {
+		hidden_effect = {
+			random_courtier = {
+				limit = {
+					NOR = {
+						scope_is_close_to_root_trigger = no
+						has_trait = demon
+						has_trait = supernatural_vampire
+						has_trait = supernatural_hybrid
+						is_adult = no
+					}
+				}
+				save_scope_as = local_courtier
+				add_trait = wounded_2
+			}
+			involved_activity = {
+				random_attending_character = {
+					limit = {
+						NOT = {
+							THIS=ROOT
+						}
+					}
+					save_scope_as = vampire0
+				}
+			}
+		}
+	}
+
+	option = { #Feed on the Wounded Courtier
+		name = snd_ev1.08.a
+		if = {
+			limit = {
+				has_trait = demon
+			}
+			add_trait_xp = {
+				trait = demon
+				value = 10
+			}			
+		}
+		else_if = {
+			limit = {
+				has_trait = supernatural_vampire
+			}
+			add_trait_xp = {
+				trait = supernatural_vampire
+				track = vampirism
+				value = 10
+			}			
+		}
+		else = {
+			limit = {
+				has_trait = supernatural_hybrid
+			}
+			add_trait_xp = {
+				trait = supernatural_hybrid
+				track = hybrid_vampirism
+				value = 10
+			}
+		}
+		scope:local_courtier = {
+			death = { death_reason = spn_death_drained }
+		}
+		remove_short_term_gold = { 5 15 }
+		
+		ai_chance = {
+			base = 50
+			modifier = { add = 15 has_trait = gluttonous }
+			modifier = { add = -10 has_trait = compassionate }
+		}
+	}
+
+	option = { #Heal the Wounded Courtier
+		name = snd_ev1.08.b
+		add_prestige = { 35 75 }
+		add_piety = { 40 85 }
+		scope:local_courtier = {
+			remove_trait = wounded_2
+			add_character_modifier = {
+				modifier = ingested_vampire_blood_modifier
+			}
+			add_character_flag = vampire_blood_in_system
+			trigger_event = {
+				id = spn_miscellaneous_events.0002
+				years = 3
+			}
+		}
+		remove_short_term_gold = { 5 15 }
+		
+		ai_chance = {
+			base = 60
+			modifier = { add = 20 has_trait = compassionate }
+			modifier = { add = -15 has_trait = sadistic }
+		}
+	}
+
+	option = { #Feed On & Heal the Wounded Couriter
+		name = snd_ev1.08.c
+		trigger = {
+			OR = {
+				has_trait_xp = {
+					trait = demon
+					value > 20
+				}
+				has_trait_xp = {
+					trait = supernatural_vampire
+					track = vampirism
+					value > 20
+				}
+				has_trait_xp = {
+					trait = supernatural_hybrid
+					track = hybrid_vampirism
+					value > 15
+				}
+			}
+		}
+		add_prestige = { 35 75 }
+		add_piety = { 40 85 }
+		if = {
+			limit = {
+				has_trait = demon
+			}
+			add_trait_xp = {
+				trait = demon
+				value = 10
+			}			
+		}
+		else_if = {
+			limit = {
+				has_trait = supernatural_vampire
+			}
+			add_trait_xp = {
+				trait = supernatural_vampire
+				track = vampirism
+				value = 10
+			}			
+		}
+		else = {
+			limit = {
+				has_trait = supernatural_hybrid
+			}
+			add_trait_xp = {
+				trait = supernatural_hybrid
+				track = hybrid_vampirism
+				value = 10
+			}
+		}
+
+		scope:local_courtier = {
+			remove_trait = wounded_2
+			add_character_modifier = {
+				modifier = ingested_vampire_blood_modifier
+			}
+			add_character_flag = vampire_blood_in_system
+			trigger_event = {
+				id = spn_miscellaneous_events.0002
+				years = 3
+			}
+		}
+		remove_short_term_gold = { 5 15 }
+		
+		ai_chance = {
+			base = 80
+			modifier = { add = 20 has_trait = ambitious }
+		}
+	}
+}
+
+snd_ev1.16 = { # Hidden Passage in the Cellar
+    type = activity_event
+    title = snd_ev1.16.title
+    desc = snd_ev1.16.desc
+    theme = intrigue
+    override_background = { reference = bp1_wine_cellar }
+
+    center_portrait = {
+        character = root
+        animation = scheming
+    }
+
+    cooldown = {
+        years = 1
+    }
+
+    trigger = {
+        is_alive = yes
+    }
+
+    immediate = {
+        # Save the current character as 'discoverer'
+        save_scope_as = discoverer
+    }
+
+    option = { # Keep the passage to yourself
+        name = snd_ev1.16.a
+        custom_tooltip = snd_ev1.16.a_tt
+
+		if = {
+			limit = {
+				has_trait = demon
+			}
+			add_trait_xp = {
+				trait = demon 
+				value = { 5 10 } 
+			}
+		}
+		else_if = {
+			limit = {
+				has_trait = supernatural_vampire
+			}
+			add_trait_xp = {
+				trait = supernatural_vampire 
+				track = vampirism 
+				value = { 5 10 } 
+			}
+		}
+		else = {
+			limit = {
+				has_trait = supernatural_hybrid
+			}
+			add_trait_xp = {
+				trait = supernatural_hybrid
+				track = hybrid_vampirism 
+				value = { 5 10 } 
+			}
+		}
+        add_character_flag = vf_escape_route_known
+
+        scope:activity = {
+			add_activity_log_entry = {
+				key = discovered_escape_route
+				tags = { good }
+				character = root
+			}
+		}
+		
+		ai_chance = {
+			base = 50
+			modifier = { add = 20 has_trait = paranoid }
+			modifier = { add = -10 has_trait = gregarious }
+		}
+    }
+
+	option = { # Share the passage with the guests
+		name = snd_ev1.16.b
+		custom_tooltip = snd_ev1.16.b_tt
+
+		trigger = {
+			scope:activity = {
+				any_attending_character = {
+					count > 1
+					NOT = { this = scope:root }
+				}
+			}
+		}
+
+		root = {
+			add_character_flag = vf_escape_route_known
+		}
+
+		scope:activity = {
+			every_attending_character = {
+				limit = {
+					NOT = { this = scope:discoverer }  # Exclude the discoverer (host) from gaining opinion of themselves
+				}
+
+				add_character_flag = vf_escape_route_known
+
+				add_opinion = {
+					target = scope:discoverer  # Ensure the opinion is directed toward the discoverer (you)
+					modifier = impressed_opinion
+					opinion = 20
+				}
+
+				custom = every_other_attendee_tt  # Add the custom tooltip for clarity
+			}
+		}
+		
+		ai_chance = {
+			base = 60
+			modifier = { add = 20 has_trait = gregarious }
+			modifier = { add = -15 has_trait = paranoid }
+		}
+	}
+
+}
+
+snd_ev1.22 = { # Whispers of Danger
+    type = activity_event
+    title = snd_ev1.22.title
+    desc = snd_ev1.22.desc
+    theme = intrigue
+    override_background = { reference = alley_night }
+
+    right_portrait = {
+        character = scope:vf_human
+        animation = afraid
+    }
+    center_portrait = {
+        character = root
+        animation = sinister
+    }
+
+    immediate = {
+        random_courtier = {
+            limit = { 
+				has_character_flag = vf_human 
+				NOR = {
+					scope_is_close_to_root_trigger = no
+					has_trait = demon
+					has_trait = supernatural_vampire
+					has_trait = supernatural_hybrid
+					is_adult = no
+				}
+			}
+            save_scope_as = vf_human
+        }
+    }
+
+    option = { # Close the distance with a burst of vampiric speed.
+        name = snd_ev1.22.a
+        trigger = { 
+			root = {
+				has_character_flag = vf_instinct_used
+			}
+		}
+        custom_tooltip = snd_ev1.22.a_tt
+
+        root = {
+			if = {
+				limit = {
+					has_trait = demon
+				}
+				add_trait_xp = { trait = demon value = { 5 15 } }
+			}
+			else_if = {
+				limit = {
+					has_trait = supernatural_vampire
+				}
+				add_trait_xp = { trait = supernatural_vampire track = vampirism value = { 5 15 } }
+			}
+			else = {
+				limit = {
+					has_trait = supernatural_hybrid
+				}
+				add_trait_xp = { trait = supernatural_hybrid track = hybrid_vampirism value = { 5 15 } }
+			}
+        }
+
+		
+		ai_chance = {
+			base = 60
+			modifier = { add = 15 has_trait = brave }
+			modifier = { add = -10 has_trait = craven }
+		}
+    }
+
+    option = { # Exploit the weakness you identified.
+        name = snd_ev1.22.b
+        trigger = {
+			root = {
+				has_character_flag = vf_scouted_location 
+			}
+		}
+        custom_tooltip = snd_ev1.22.b_tt
+        root = {
+			if = {
+				limit = {
+					has_trait = demon
+				}
+				add_trait_xp = {
+					trait = demon 
+					value = { 1 5 } 
+				}
+			}
+			else_if = {
+				limit = {
+					has_trait = supernatural_vampire
+				}
+				add_trait_xp = {
+					trait = supernatural_vampire 
+					track = vampirism 
+					value = { 1 5 } 
+				}
+			}
+			else = {
+				limit = {
+					has_trait = supernatural_hybrid
+				}
+				add_trait_xp = {
+					trait = supernatural_hybrid
+					track = hybrid_vampirism 
+					value = { 2 6 } 
+				}
+			}
+        }
+		
+		ai_chance = {
+			base = 50
+			modifier = { add = 20 has_trait = shrewd }
+			modifier = { add = -10 has_trait = reckless }
+		}
+    }
+
+
+    option = { # Spring the trap, leaving them no escape.
+        name = snd_ev1.22.c
+        trigger = { 
+			root = {
+				has_character_flag = vf_laid_trap
+			}
+		}
+        custom_tooltip = snd_ev1.22.c_tt
+
+        root = {
+			if = {
+				limit = {
+					has_trait = demon
+				}
+				add_trait_xp = { trait = demon value = { 5 15 } }
+			}
+			else_if = {
+				limit = {
+					has_trait = supernatural_vampire
+				}
+				add_trait_xp = { trait = supernatural_vampire track = vampirism value = { 5 15 } }
+			}
+			else = {
+				limit = {
+					has_trait = supernatural_hybrid
+				}
+				add_trait_xp = { trait = supernatural_hybrid track = hybrid_vampirism value = { 5 15 } }
+			}
+        }
+
+		ai_chance = {
+			base = 55
+			modifier = { add = 15 has_character_flag = vf_laid_trap }
+		}
+    }
+
+    option = { # Advance boldly, their fear palpable.
+        name = snd_ev1.22.d
+        trigger = { 
+			root = {
+				has_trait = supernatural_hybrid
+			}
+		}
+        custom_tooltip = snd_ev1.22.d_tt
+
+        root = {
+            add_trait_xp = { trait = supernatural_hybrid track = hybrid_vampirism value = { 5 15 } }
+        }
+
+    }
+}
+
+
+snd_ev1.23 = { # The Crimson Decision
+    type = activity_event
+    title = snd_ev1.23.title
+    desc = snd_ev1.23.desc
+    theme = intrigue
+    override_background = { reference = alley_night }
+
+    right_portrait = {
+        character = scope:vf_human
+        animation = terrified
+    }
+    center_portrait = {
+        character = root
+        animation = sinister
+    }
+
+    immediate = {
+        random_courtier = {
+            limit = { 
+				has_character_flag = vf_human
+				NOR = {
+					scope_is_close_to_root_trigger = no
+					has_trait = demon
+					has_trait = supernatural_vampire
+					has_trait = supernatural_hybrid
+					is_adult = no
+				}
+			}
+            save_scope_as = vf_human
+        }
+    }
+
+    option = { # Drain them completely, savoring every drop.
+        name = snd_ev1.23.a
+        custom_tooltip = snd_ev1.23.a_tt
+
+        root = {
+			if = {
+				limit = {
+					has_trait = demon
+				}
+				add_trait_xp = {
+					trait = demon
+					value = { 20 30 } 
+				}
+			}
+			else_if = {
+				limit = {
+					has_trait = supernatural_vampire
+				}
+				add_trait_xp = {
+					trait = supernatural_vampire
+					track = vampirism
+					value = { 20 30 } 
+				}
+			}
+			else = {
+				limit = {
+					has_trait = supernatural_hybrid
+				}
+				add_trait_xp = {
+					trait = supernatural_hybrid
+					track = hybrid_vampirism
+					value = { 20 30 } 
+				}
+			}
+            add_stress = major_stress_impact_gain
+        }
+		scope:vf_human = {
+			death = {
+				death_reason = spn_death_drained
+				killer = root
+			}
+		}
+    }
+
+    option = { # Take just enough to satiate your hunger.
+        name = snd_ev1.23.b
+        custom_tooltip = snd_ev1.23.b_tt
+
+        root = {
+			if = {
+				limit = {
+					has_trait = demon
+				}
+				add_trait_xp = {
+					trait = demon
+					value = 10 
+				}
+			}
+			else_if = {
+				limit = {
+					has_trait = supernatural_vampire
+				}
+				add_trait_xp = {
+					trait = supernatural_vampire
+					track = vampirism
+					value = 10 
+				}
+			}
+			else = {
+				limit = {
+					has_trait = supernatural_hybrid
+				}
+				add_trait_xp = {
+					trait = supernatural_hybrid
+					track = hybrid_vampirism
+					value = 10
+				}
+			}
+            stress_impact = {
+				base = minor_stress_impact_loss
+			}
+        }
+		scope:vf_human = {
+			if = {
+				limit = {
+					has_trait = demon
+				}
+				add_character_modifier = {
+					modifier = demon_recently_fed_on_modifier
+					years = 3
+				}
+			}
+			else ={
+				add_character_modifier = {
+					modifier = vf_recently_fed_on_modifier
+					years = 3
+				}
+			}
+		}
+
+    }
+
+    option = { # Take a small taste and step back.
+        name = snd_ev1.23.c
+        custom_tooltip = snd_ev1.23.c_tt
+
+        root = {
+            add_piety = { 10 20 }
+            add_stress = minor_stress_impact_loss
+			if = {
+				limit = {
+					has_trait = demon
+				}
+				add_trait_xp = {
+					trait = demon
+					value = { 4 8 }
+				}
+			}
+			else_if = {
+				limit = {
+					has_trait = supernatural_vampire
+				}
+				add_trait_xp = {
+					trait = supernatural_vampire
+					track = vampirism
+					value = { 4 8 }
+				}
+			}
+			else = {
+				limit = {
+					has_trait = supernatural_hybrid
+				}
+				add_trait_xp = {
+					trait = supernatural_hybrid
+					track = hybrid_vampirism
+					value = { 2 6 }
+				}
+			}
+        }
+		scope:vf_human = {
+			if = {
+				limit = {
+					has_trait = demon
+				}
+				add_character_modifier = {
+					modifier = demon_recently_fed_on_modifier
+					years = 3
+				}
+			}
+			else ={
+				add_character_modifier = {
+					modifier = vf_recently_fed_on_modifier
+					years = 3
+				}
+			}
+		}
+
+    }
+
+    option = { # Use the hidden escape route.
+        name = snd_ev1.23.d
+        trigger = { has_character_flag = vf_escape_route_known }
+        custom_tooltip = snd_ev1.23.d_tt
+
+        root = {
+            add_trait_xp = {
+				trait = supernatural_vampire
+				track = vampirism
+				value = 5 
+			}
+        }
+
+    }
+
+    option = { # Feed and then loot them.
+        name = snd_ev1.23.e
+        trigger = {
+            scope:activity = { has_activity_option = { category = options_spoils option = spoils_option_robbing } }
+        }
+        custom_tooltip = snd_ev1.23.e_tt
+
+        root = {
+            add_gold = { 20 125 }
+			if = {
+				limit = {
+					has_trait = demon
+				}
+				add_trait_xp = {
+					trait = demon
+					value = { 4 8 }
+				}
+			}
+			else_if = {
+				limit = {
+					has_trait = supernatural_vampire
+				}
+				add_trait_xp = {
+					trait = supernatural_vampire
+					track = vampirism
+					value = { 4 8 }
+				}
+			}
+			else = {
+				limit = {
+					has_trait = supernatural_hybrid
+				}
+				add_trait_xp = {
+					trait = supernatural_hybrid
+					track = hybrid_vampirism
+					value = { 4 8 }
+				}
+			}
+        }
+		scope:vf_human = {
+			if = {
+				limit = {
+					has_trait = demon
+				}
+				add_character_modifier = {
+					modifier = demon_recently_fed_on_modifier
+					years = 3
+				}
+			}
+			else ={
+				add_character_modifier = {
+					modifier = vf_recently_fed_on_modifier
+					years = 3
+				}
+			}
+		}
+    }
+
+    option = { # A wealthy target yields more than just blood.
+        name = snd_ev1.23.f
+        trigger = {
+            scope:activity = { has_activity_option = { category = options_spoils option = spoils_option_casing } }
+        }
+        custom_tooltip = snd_ev1.23.f_tt
+
+        root = {
+            add_gold = { 50 250 }
+			if = {
+				limit = {
+					has_trait = demon
+				}
+				add_trait_xp = {
+					trait = demon
+					value = { 4 8 }
+				}
+			}
+			else_if = {
+				limit = {
+					has_trait = supernatural_vampire
+				}
+				add_trait_xp = {
+					trait = supernatural_vampire
+					track = vampirism
+					value = { 4 8 }
+				}
+			}
+			else = {
+				limit = {
+					has_trait = supernatural_hybrid
+				}
+				add_trait_xp = {
+					trait = supernatural_hybrid
+					track = hybrid_vampirism
+					value = { 4 8 }
+				}
+			}
+        }
+		scope:vf_human = {
+			if = {
+				limit = {
+					has_trait = demon
+				}
+				add_character_modifier = {
+					modifier = demon_recently_fed_on_modifier
+					years = 3
+				}
+			}
+			else ={
+				add_character_modifier = {
+					modifier = vf_recently_fed_on_modifier
+					years = 3
+				}
+			}
+		}
+    }
+}
+
