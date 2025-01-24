@@ -106,3 +106,18 @@ soul_devourer_perk_name:0 "Soul Devourer"
 true_demon_highness_perk:0 "True Demon Highness"
 true_demon_highness_perk_name:0 "True Demon Highness"
 balanced_conqueror:0 ""
+
+common_interaction:0 "Consume Prisoner"
+consume_prisoner:0 "Consume Prisoner"
+consume_prisoner_name:0 "Consume Prisoner"
+
+trait_balanced_conqueror:0 "Conqueror"
+
+demon_lifestyle_name:0 "Demon Lifestyle"
+demon_lifestyle_desc:0 "Life of a Demon Beeing"
+demon_lifestyle_highlight_desc:0 "Becomming Bhaal"
+
+
+demon_supremacy_focus:0 "Demon Supremacy"
+demon_supremacy_focus_effect_desc:0 "Evolving into something else"
+demon_focus_desc:0 "Follow the path of the Evolution of yourself"

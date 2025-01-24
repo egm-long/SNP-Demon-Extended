@@ -1,0 +1,363 @@
+consume_prisoner = {
+
+	is_shown = {
+		NOT = { scope:recipient = scope:actor}
+		scope:recipient = {
+			#spn_has_supernatural_trait = no
+			NOR = {
+				has_trait = demon
+				has_trait = demon0
+				has_trait = supernatural_hunter
+			}
+			is_imprisoned = yes
+                    is_imprisoned_by = scope:actor
+			
+			#NOT = { has_trait = supernatural_hunter }
+		}
+		scope:actor = {
+			OR = {
+				has_trait = balanced_conqueror
+				}
+		}
+	}
+
+	
+
+	common_interaction = yes
+	interface_priority = 90
+	popup_on_receive = no
+	category = interaction_category_hostile
+	desc = snd_turn_into_demon_interaction_desc
+	icon = werewolf
+
+	cooldown_against_recipient = { years = 0 } 
+	cooldown = { months = 0 } 
+	ignores_pending_interaction_block = yes
+	use_diplomatic_range = yes
+	
+	on_accept = {
+		scope:actor = {
+			send_interface_message = {
+				type = event_toast_effect_neutral
+				title = consume_prisoner
+				left_icon = scope:actor
+				right_icon = scope:recipient
+				custom_tooltip = absorb_good_traits_ct
+				custom_tooltip = ev6.66.0.a_ct
+				if = {
+					limit = {
+						NOR = {
+							has_trait = compassionate
+							has_trait = honest
+							has_trait = just
+						}
+					}
+					add_stress = minor_stress_loss
+				}
+				
+				stress_impact = {
+					compassionate = major_stress_impact_gain
+					honest = minor_stress_impact_gain
+					just = minor_stress_impact_gain
+				}
+				scope:recipient = {
+					custom_tooltip = consume_prisoner
+					if = {
+						limit = {
+							num_of_bad_genetic_traits = 0
+						}
+						scope:actor = {
+							add_character_modifier = {
+								modifier = ate_good_meal
+								years = 3
+							}
+						}
+					}
+					hidden_effect = {
+							if = {
+								limit = {
+									OR = {
+										has_trait = beauty_good_3
+										has_trait = beauty_good_2
+										has_trait = beauty_good_1
+									}
+									scope:actor = {
+										NOT = {
+											has_trait = beauty_good_3
+										}
+									}
+								}
+								scope:actor = {
+									if = {
+										limit = {
+											has_trait = beauty_bad_3
+										}
+										remove_trait = beauty_bad_3
+										add_trait = beauty_bad_2
+									}
+									else_if = {
+										limit = {
+											has_trait = beauty_bad_2
+										}
+										remove_trait = beauty_bad_2
+										add_trait = beauty_bad_1
+									}
+									else_if = {
+										limit = {
+											has_trait = beauty_bad_1
+										}
+										remove_trait = beauty_bad_1
+									}
+									else_if = {
+										limit = {
+											has_trait = beauty_good_1
+											scope:recipient = {
+												OR = {
+													has_trait = beauty_good_3
+													has_trait = beauty_good_2
+												}
+												
+											}
+										}
+										remove_trait = beauty_good_1
+										add_trait = beauty_good_2
+									}
+									else_if = {
+										limit = {
+											has_trait = beauty_good_2
+											scope:recipient = {
+												has_trait = beauty_good_3
+											}
+										}
+										remove_trait = beauty_good_2
+										add_trait = beauty_good_3
+									}
+									else = {
+										add_trait = beauty_good_1
+									}
+								}	
+							}
+						
+						
+							chance = 100
+							#intellect
+							if = {
+								limit = {
+									OR = {
+										has_trait = intellect_good_3
+										has_trait = intellect_good_2
+										has_trait = intellect_good_1
+									}
+									scope:actor = {
+										NOT = {
+											has_trait = intellect_good_3
+										}
+									}
+								}
+								scope:actor = {
+									if = {
+										limit = {
+											has_trait = intellect_bad_3
+										}
+										remove_trait = intellect_bad_3
+										add_trait = intellect_bad_2
+									}
+									else_if = {
+										limit = {
+											has_trait = intellect_bad_2
+										}
+										remove_trait = intellect_bad_2
+										add_trait = intellect_bad_1
+									}
+									else_if = {
+										limit = {
+											has_trait = intellect_bad_1
+										}
+										remove_trait = intellect_bad_1
+									}
+									else_if = {
+										limit = {
+											has_trait = intellect_good_1
+											scope:recipient = {
+												OR = {
+													has_trait = intellect_good_3
+													has_trait = intellect_good_2
+												}
+												
+											}
+										}
+										remove_trait = intellect_good_1
+										add_trait = intellect_good_2
+									}
+									else_if = {
+										limit = {
+											has_trait = intellect_good_2
+											scope:recipient = {
+												has_trait = intellect_good_3
+											}
+										}
+										remove_trait = intellect_good_2
+										add_trait = intellect_good_3
+									}
+									else = {
+										add_trait = intellect_good_1
+									}
+								}	
+							}
+						
+					
+
+						if = {
+							limit = {
+								has_trait = strong
+								scope:actor = {
+									NOT = {
+										has_trait = strong
+									}
+								}
+							}
+							scope:actor = {
+								random = {
+									chance = 100
+									if = {
+										limit = {
+											has_trait = weak
+										}
+										remove_trait = weak
+									}
+									else = {
+										add_trait = strong
+									}
+									
+								}
+							}
+						}
+
+						if = {
+							limit = {
+								has_trait = fecund
+								scope:actor = {
+									NOT = {
+										has_trait = fecund
+									}
+								}
+							}
+							scope:actor = {
+								random = {
+									chance = 100
+									if = {
+										limit = {
+											has_trait = infertile
+										}
+										remove_trait = infertile
+									}
+									else = {
+										add_trait = fecund
+									}
+								}
+							}
+						}
+
+						if = {
+							limit = {
+								has_trait = shrewd
+								scope:actor = {
+									NOT = {
+										has_trait = shrewd
+									}
+								}
+							}
+							scope:actor = {
+								random = {
+									chance = 100
+									if = {
+										limit = {
+											has_trait = dull
+										}
+										remove_trait = dull
+									}
+									else = {
+										add_trait = shrewd
+									}
+								}
+							}
+						}
+					}
+					
+					if = {
+						limit = {
+							can_spend_standard_ps_trigger = yes
+							scope:actor = {
+								can_be_power_saturated_trigger = yes
+							}
+						}
+						scope:actor = {
+							gain_source_ps_effect = yes
+						}
+					}
+
+					
+					
+					hidden_effect = {
+						death = {
+							killer = scope:actor
+							#death_reason = death_eaten
+							death_reason = death_murder
+						}
+					}
+					
+					
+				}
+				hidden_effect = {
+					add_secret = {
+						type = secret_murder
+						target = scope:recipient
+					}
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+	ai_potential = {
+		NOR = {
+			has_trait = compassionate
+			has_trait = forgiving
+			has_trait = temperate
+		}
+	}
+	
+	ai_targets = {
+		ai_recipients = prisoners
+	}
+
+	ai_frequency = 24
+
+	ai_will_do = {
+		base = 50
+		modifier = {
+			add = -150
+			scope:recipient = {
+				is_primary_heir_of = scope:actor
+			}
+		}
+		modifier = {
+			add = 30
+			has_character_modifier = yaga_modifier
+		}
+		modifier = {
+			add = -250
+			has_character_modifier = yaga_modifier
+			scope:recipient = {
+				has_trait = source2
+			}
+		}
+		modifier = {
+			add = -250
+			has_trait = source2
+			scope:recipient = {
+				has_trait = source2
+			}
+		}
+	}
+}

@@ -19,6 +19,8 @@
 	base_xp_gain = 25
 }
 demon_lifestyle = {
+	
+
 	is_highlighted = {
 		has_trait = demon
 		

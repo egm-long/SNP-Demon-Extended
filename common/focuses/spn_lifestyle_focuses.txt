@@ -672,7 +672,7 @@ demon_supremacy_focus = {
 	}
 
 	desc = {
-		desc = vampire_focus_desc # Changes needed
+		desc = demon_focus_desc # Changes needed
 		desc = line_break # Changes needed
 	}
 
