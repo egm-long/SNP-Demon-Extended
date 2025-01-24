@@ -75,3 +75,34 @@ snd_ev1.23.f_tt:0 "You relieve them of a significant sum."
 
  building_type_demon_castle:0 "The Castle of Demons"
  building_type_demon_castle_desc:0 "The Castle of Demons is a place of dark power and malevolent intent. The very walls seem to pulse with the energy of the abyss, and the air is thick with the scent of brimstone. The castle is home to a host of demonic creatures, each more terrifying than the last. The castle's inhabitants are fiercely
+
+# Fokus
+
+demon_supremacy_focus.title:0 ""
+demon_supremacy_focus.desc:0 ""
+
+# Demon Lifestyle 
+minor_demon_perk:0 "Minor Demon"
+minor_demon_perk_name:0 "Minor Demon"
+
+demon_seduction_perk:0 "Demonic Seduction"
+demon_seduction_perk_name:0 "Demonic Seduction"
+
+demonic_steps_perk:0 "Demonic Steps"
+demonic_steps_perk_name:0 "Demonic Steps"
+
+demon_aura_perk:0 "Demonic Aura"
+demon_aura_perk_name:0 "Demonic Aura"
+
+demon_circle_perk:0 "High Circle"
+demon_circle_perk_name:0 "High Circle"
+
+demon_domination_perk:0 "Demon Domination"
+demon_domination_perk_name:0 "Demon Domination"
+
+soul_devourer_perk:0 "Soul Devourer"
+soul_devourer_perk_name:0 "Soul Devourer"
+
+true_demon_highness_perk:0 "True Demon Highness"
+true_demon_highness_perk_name:0 "True Demon Highness"
+balanced_conqueror:0 ""

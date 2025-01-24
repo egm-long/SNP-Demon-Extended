@@ -150,3 +150,30 @@
 	}
 	desc = trait_demon_desc
 }
+
+
+
+
+balanced_conqueror = {
+	category = fame
+	flag = conqueror_bonuses_modifier
+	icon = conqueror_icon
+
+	ai_war_chance = -10
+	ai_war_cooldown = -10
+	ai_amenity_spending = -0.15
+	ai_amenity_target_baseline = -0.2
+	title_creation_cost_mult = -0.20
+	monthly_legitimacy_add = 1
+	men_at_arms_maintenance = -0.15
+	monthly_income = 3
+	enemy_hostile_scheme_phase_duration_add = 5
+	enemy_hostile_scheme_success_chance_max_add = -20
+	enemy_hostile_scheme_success_chance_growth_add = -1
+	
+	shown_in_ruler_designer = no
+	
+	#ai_greed = 1000
+	#ai_boldness = 1000
+	#ai_honor = -1000
+}
