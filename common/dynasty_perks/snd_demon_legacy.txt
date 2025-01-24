@@ -1,0 +1,116 @@
+﻿# DEMON_LEGACY
+
+demon_legacy_1 = { # seed of the demon
+	legacy = demon_legacy_track
+
+	character_modifier = {
+		monthly_prestige = 0.5
+		monthly_prestige_gain_mult = 0.05
+		monthly_piety = 0.5
+		monthly_piety_gain_mult = 0.05
+		fertility = 0.15
+		monthly_county_control_growth_add = 0.5
+		attraction_opinion = 5
+	}
+	
+	ai_chance = {
+		value = 8
+		if = {
+			limit = {
+				OR = {
+					has_trait = demon
+				}
+			}
+			add = 15
+		}
+		if = {
+			limit = {
+				can_start_new_legacy_track_trigger = no
+			}
+			multiply = 0
+		}
+	}
+}
+
+demon_legacy_2 = { # Army of Darkness and Martial Prowess
+	legacy = demon_legacy_track
+
+	effect = {
+	}
+
+	character_modifier = {
+		prowess = 5
+		knight_effectiveness_mult = 0.2
+		counter_efficiency = 0.15
+	}
+}
+
+demon_legacy_3 = { # Establish the Demon Guardians
+	legacy = demon_legacy_track
+	effect = {
+		give_magic_artifacts_claims_from_dynasty_perks_effect = yes
+	}
+
+	character_modifier = {
+		knight_effectiveness_mult = 0.1
+		knight_limit = 2
+		powerful_vassal_opinion = 5
+		owned_scheme_secrecy_add = 10
+	}
+}
+
+
+demon_legacy_4 = { # Demon Overlord
+	legacy = demon_legacy_track
+
+	effect = {
+	}
+	character_modifier = {
+		retreat_losses = -0.1
+		men_at_arms_cap = 1
+		monthly_prestige_gain_mult = 0.1
+		domain_limit = 1
+	}
+
+}
+
+demon_legacy_5 = { # Demon Blood
+	legacy = demon_legacy_track
+	effect = {
+		hidden_effect = {
+			dynasty  = {
+				every_dynasty_member = {
+					limit = {
+						has_trait = source
+					}
+					send_interface_toast = {
+						title = demon_legacy_5
+						add_5_magic_potential = yes
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					is_adult = yes
+					is_ai = yes
+					NOR = {
+						has_trait = archmage
+						has_trait = supernatural_hunter
+					}
+				}
+				turn_into_mage_effect = yes
+			}
+		}
+	}
+	character_modifier = {
+		true3_source_terrain_advantage = 5
+		genetic_trait_strengthen_chance = 0.2
+		court_grandeur_baseline_add = 5
+		positive_random_genetic_chance = 0.15
+		positive_inactive_inheritance_chance = 0.15
+		negative_random_genetic_chance = -0.10
+		negative_inactive_inheritance_chance = -0.10
+	}
+}

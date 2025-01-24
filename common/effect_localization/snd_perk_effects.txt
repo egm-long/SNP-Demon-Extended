@@ -1,0 +1,35 @@
+﻿demon_legacy_4_ct1_effect = {
+	global = demon_legacy_4_ct1
+	first = demon_legacy_4_ct1
+	third = demon_legacy_4_ct1
+}
+demon_legacy_3_ct_effect = {
+	global = demon_legacy_3_ct
+	first = demon_legacy_3_ct
+	third = demon_legacy_3_ct
+}
+demon_legacy_2_ct_effect = {
+	global = demon_legacy_2_ct
+	first = demon_legacy_2_ct
+	third = demon_legacy_2_ct
+}
+demon_legacy_1_ct_effect = {
+	global = demon_legacy_1_ct
+	first = demon_legacy_1_ct
+	third = demon_legacy_1_ct
+}
+demon_legacy_1_ct2_effect = {
+	global = demon_legacy_1_ct2
+	first = demon_legacy_1_ct2
+	third = demon_legacy_1_ct2
+}
+demon_legacy_1_ct3_effect = {
+	global = demon_legacy_1_ct3
+	first = demon_legacy_1_ct3
+	third = demon_legacy_1_ct3
+}
+demon_legacy_5a_ct_effect = {
+	global = demon_legacy_5a_ct_effect_ct1
+	first = demon_legacy_5a_ct_effect_ct1
+	third = demon_legacy_5a_ct_effect_ct1
+}
