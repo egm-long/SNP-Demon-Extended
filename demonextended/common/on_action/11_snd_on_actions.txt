@@ -1,6 +1,0 @@
-﻿# Game Start
-on_game_start_after_lobby = {
-	on_actions = {
-		snd_assign_all_religions_immortal_doctrines
-	}
-}
