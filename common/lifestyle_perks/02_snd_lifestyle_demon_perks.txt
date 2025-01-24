@@ -37,11 +37,14 @@ minor_demon_perk = {
 	
 	character_modifier = {
         intrigue = 3
-		#monthly_income = 2
-		add source_xp = 2
+		
 	}
-	
-	
+	add_trait_xp = {
+		trait = source
+		track = magic_potential
+		value = 30
+	}
+	monthly_income = 2	
 }
 
 # Left Lifestyle Path
@@ -69,7 +72,7 @@ demon_seduction_perk = {
 	#}
 	
 	character_modifier = {
-		seduce_scheme_power_mult = 0.10
+		#seduce_scheme_power_mult = 0.10
 		seduce_scheme_phase_duration_add = -5
 		attraction_opinion = 25
 		}
@@ -131,6 +134,7 @@ demon_aura_perk = {
 		men_at_arms_maintenance_per_dread_mult = -0.005
 		general_opinion = 20
 	}
+	
 }
 
 # Right Lifestyle Path
