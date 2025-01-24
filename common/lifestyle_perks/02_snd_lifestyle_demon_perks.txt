@@ -1,11 +1,11 @@
-
+﻿
 ### Demon - PERKS
 
 
 # Minor Demon
 minor_demon_perk = {
 	lifestyle = demon_lifestyle
-	tree = demon_supremacy
+	tree = magic
 	position = { 1 0 }
 	icon = node_vampire # Anpassungen Notwendig 
 
@@ -49,7 +49,7 @@ minor_demon_perk = {
 # Demon Seduction
 demon_seduction_perk = {
 	lifestyle = demon_lifestyle
-	tree = demon_supremacy
+	tree = magic
 	position = { 0 1 }
 	icon = node_vampire
 
@@ -79,7 +79,7 @@ demon_seduction_perk = {
 # Demon Schemes
 demonic_steps_perk = {
 	lifestyle = demon_lifestyle
-	tree = demon_supremacy
+	tree = magic
 	position = { 0 2 }
 	icon = node_vampire
 
@@ -113,7 +113,7 @@ demonic_steps_perk = {
 # Demon Aura
 demon_aura_perk = {
 	lifestyle = demon_lifestyle
-	tree = demon_supremacy
+	tree = magic
 	position = { 0 3 }
 	icon = node_vampire
 
@@ -138,7 +138,7 @@ demon_aura_perk = {
 # Demon Circle
 demon_circle_perk = {
 	lifestyle = demon_lifestyle
-	tree = demon_supremacy
+	tree = magic
 	position = { 2 1 }
 	icon = node_vampire
 
@@ -170,7 +170,7 @@ demon_circle_perk = {
 # Domination
 demon_domination_perk = {
 	lifestyle = demon_lifestyle
-	tree = demon_supremacy
+	tree = magic
 	position = { 2 2 }
 	icon = node_vampire
 
