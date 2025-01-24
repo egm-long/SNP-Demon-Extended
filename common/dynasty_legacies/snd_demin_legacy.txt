@@ -1,0 +1,5 @@
+﻿demon_legacy_track = {
+	is_shown = {
+		has_trait = demon
+	}
+}
