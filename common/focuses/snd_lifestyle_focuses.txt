@@ -651,3 +651,51 @@ blackmagic_focus = {
 	}
 
 }
+
+# Testphase for Demon Lifestyle Focus
+
+
+demon_demon_supremacy_focus = {
+	lifestyle = demon_lifestyle
+	is_valid = {
+		has_trait = demon
+	}
+	is_shown = {
+		NOT = { government_has_flag = government_is_landless_adventurer }
+	}
+	is_valid = {
+		NOT = { government_has_flag = government_is_landless_adventurer }
+	}
+	
+	modifier = {
+		intrigue = 3
+	}
+
+	desc = {
+		desc = vampire_focus_desc # Changes needed
+		desc = line_break # Changes needed
+	}
+
+	auto_selection_weight = {
+		value = 11
+		if = {
+			limit = {
+				has_demon_interest_trigger = yes
+			}
+			add = 2000
+		}
+		if = {
+			limit = {
+				age > 55
+			}
+			multiply = 2
+		}
+		if = {
+			limit = {
+				has_trait = sadistic
+			}
+			multiply = 3
+		}
+	}
+	
+}
