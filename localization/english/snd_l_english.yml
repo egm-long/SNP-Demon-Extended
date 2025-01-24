@@ -3,6 +3,8 @@
  minor_demonic_knights_flavor:0 "#F Nothing can stop the warriors of the abyss.#!"
  greater_demonic_knights:0 "Greater Demonic Knights"
  greater_demonic_knights_flavor:0 "#F Nothing can stop the warriors of the abyss.#!"
+ demon_knights:0 "Demon Knights"
+ demon_knights_flavor:0 "#F Nothing can stop the warriors. Trained in demonic martial Arts#!"
  snd_doctrine_demonism_name:0 "Demonism"
  snd_doctrine_demonism_crime_name:0 "Criminal"
  snd_doctrine_demonism_crime_desc:0 "These creatures are an abomination!"
