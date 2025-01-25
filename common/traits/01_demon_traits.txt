@@ -139,7 +139,10 @@
 	compatibility = {
 		witch = 10
 		true_witch = 10
-		witch_hunter = -30
+		demon = 10
+		witch_hunter = -50
+		supernatural_hunter = -50
+		witch_hunter = -50
 	}
 	opposites = {
 		supernatural_hybrid
@@ -150,9 +153,6 @@
 	}
 	desc = trait_demon_desc
 }
-
-
-
 
 balanced_conqueror = {
 	category = fame
