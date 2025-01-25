@@ -9,8 +9,7 @@ consume_prisoner = {
 				has_trait = demon0
 				has_trait = supernatural_hunter
 			}
-			is_imprisoned = yes
-                    is_imprisoned_by = scope:actor
+			
 			
 			#NOT = { has_trait = supernatural_hunter }
 		}
@@ -19,6 +18,8 @@ consume_prisoner = {
 				has_trait = balanced_conqueror
 				}
 		}
+		is_imprisoned = yes
+                    is_imprisoned_by = scope:actor
 	}
 
 	

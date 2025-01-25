@@ -101,6 +101,6 @@ demon_knights = {
 	low_maintenance_cost = { gold = skirmisher_low_maint_cost piety = skirmisher_low_maint_cost prestige = pikemen_low_maint_cost }
 	high_maintenance_cost = { gold = skirmisher_high_maint_cost piety = skirmisher_low_maint_cost prestige = pikemen_low_maint_cost }
 	
-	max_sub_regiments = -1
+	max_sub_regiments = 6
 	stack = 100
 }
