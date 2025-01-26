@@ -9,5 +9,6 @@ on_game_start_after_lobby = {
 yearly_global_pulse = {
 	events = {
 		snd_ev2.1
+		snd_ev2.2
 	}
 }

@@ -195,6 +195,416 @@ snd_ev2.1 = { # magic_ev2.15 = {
 	}
 }
 
+#some magic event initialisation
+snd_ev2.2 = { # magic_ev2.1 = {
+	hidden = yes
+	#type = empty
+	scope = none
+	immediate = {
+		
+		random_list = {
+			50 = {
+				#rumors about mages
+				trigger = {
+					any_ruler = {
+						exists = dynasty
+						dynasty={
+							NOT={
+								has_variable=rumors_mages
+							}
+						}
+						is_ai = no
+						NOR = {
+							any_character_artifact = { has_variable = magic1 }
+							has_trait = source
+						}
+					}
+					any_ruler = {
+						OR = {
+							has_trait = archmage
+							has_focus = arcane_focus
+						}
+						any_character_artifact = { has_variable = magic1 }
+						is_ai = yes
+					}
+				}
+				random_ruler = {
+					limit = {
+						exists = dynasty
+						dynasty={
+							NOT={
+								has_variable=rumors_mages
+							}
+						}
+						is_ai = no
+						NOR = {
+							any_character_artifact = { has_variable = magic1 }
+							has_trait = source
+							#has_trait = source2
+							#has_trait = source4
+						}
+					}
+					trigger_event = {
+						id = magic_ev2.25
+						days = { 1 360 }
+					}
+					#trigger_event = magic_ev.100
+				}
+			}
+			30 = {
+				#ring of life paranoia/special
+				trigger = {
+					any_ruler = {
+						is_ai = no
+						any_character_artifact = {
+							has_variable = magic_ring0
+							has_artifact_modifier = artifact_ring_of_life_modifier
+						}
+					}
+				}
+				if = {
+					limit = {
+						any_ruler = {
+							is_ai = no
+							any_character_artifact = { has_variable = magic_ring0 }
+							NOT = {	has_character_flag = ring_of_life_paranoia	}
+						}
+					}
+					random_ruler = {
+						limit = {
+							is_ai = no
+							any_character_artifact = { has_variable = magic_ring0 }
+							NOT = {	has_character_flag = ring_of_life_paranoia	}
+						}
+						trigger_event = {
+							id = magic_ev4.51
+							days = { 1 360 }
+						}
+					}
+				}
+			}
+			70 = {
+				#preemptive strike
+				trigger = {
+					any_ruler = {
+						NOT = {
+							has_character_flag = special_magic_character
+						}
+						OR = {
+							has_trait = archmage
+							has_focus = arcane_focus
+							has_trait = demon
+						}
+						OR = {
+							any_relation = {
+								type = rival
+								OR = {
+									has_trait = archmage
+									has_focus = arcane_focus
+								}
+							}
+							any_relation = {
+								type = nemesis
+								OR = {
+									has_trait = archmage
+									has_focus = arcane_focus
+								}
+							}
+						}
+					}
+				}
+				random_ruler = {
+					limit = {
+						NOT = {	has_character_flag = special_magic_character	}
+						OR = {
+							has_trait = demon
+						}
+						OR = {
+							any_relation = {
+								type = rival
+								OR = {
+									has_trait = archmage
+									has_focus = arcane_focus
+								}
+							}
+							any_relation = {
+								type = nemesis
+								OR = {
+									has_trait = archmage
+									has_focus = arcane_focus
+								}
+							}
+						}
+						is_landed_or_landless_administrative = yes
+					}
+					trigger_event = {
+						id = magic_ev2.5
+						days = { 1 360 }
+					}
+				}
+			}
+			60 = {
+				#rival for demon
+				trigger = {
+					any_living_character = {
+						NOT = {	has_character_flag = special_magic_character	}
+						has_trait = demon
+						NOT = { has_character_flag = lilith }
+						NOT = {	has_trait = incapable	}
+						NOT = {
+							any_relation = {
+								type = rival
+							}
+						}
+						NOT = {
+							any_relation = {
+								type = nemesis
+							}
+						}
+						is_ai = yes
+					}
+					any_ruler = {
+						NOT = { has_trait = demon }
+						OR = {
+							has_trait = archmage
+							has_focus = arcane_focus
+						}
+					}
+				}
+				random_living_character = {
+					limit = {
+						NOT = {	has_character_flag = special_magic_character	}
+						has_trait = demon
+						NOT = { has_character_flag = lilith }
+						NOT = {	has_trait = incapable	}
+						NOT = {
+							any_relation = {
+								type = rival
+							}
+						}
+						NOT = {
+							any_relation = {
+								type = nemesis
+							}
+						}
+						is_ai = yes
+					}
+					trigger_event = {
+						id = magic_ev2.14
+						days = { 1 360 }
+					}
+				}
+			}
+			60 = {
+				#magic catalyst/darkblade/singularity/crown turn ai into witch
+				trigger = {
+					any_living_character = {
+						NOR = {
+							has_trait = witch
+							any_secret = { secret_type = secret_witch }
+							has_character_flag = used_catalyst
+						}
+						OR = {
+							any_character_artifact = { has_variable = catalyst }
+							any_character_artifact = { has_variable = singularity }
+							any_character_artifact = { has_variable = dark_blade }
+							any_character_artifact = { has_variable = magic_crown }
+						}
+						
+						is_ai = yes
+						is_adult = yes
+					}
+				}
+				random_living_character = {
+					limit = {
+						NOR = {
+							has_trait = witch
+							any_secret = { secret_type = secret_witch }
+							has_character_flag = used_catalyst
+						}
+						OR = {
+							any_character_artifact = { has_variable = catalyst }
+							any_character_artifact = { has_variable = singularity }
+							any_character_artifact = { has_variable = dark_blade }
+							any_character_artifact = { has_variable = magic_crown }
+							has_power_place_trigger = yes
+						}
+						is_ai = yes
+						is_adult = yes
+					}
+					trigger_event = magic_ev2.23
+				}
+			}
+			60 = {
+				#ending crises
+				trigger = {
+					NOT = {
+						has_game_rule = never_magic_endings_delay
+					}
+					exists = global_var:ready_4_crisis_var
+					NOR = {
+						exists = global_var:magic_grand_coalition_start
+						any_living_character = {
+							has_character_flag = abdul_dude
+						}
+						any_living_character = {
+							has_character_flag = bael_flag
+						}
+						any_living_character = {
+							has_character_flag = may_has_wh_coalition_war_flag
+						}
+					}
+				}
+				random_ruler = {
+					limit = {
+						has_trait = witch_hunter
+						has_character_modifier = inq_modifier
+						is_ai = yes
+						is_imprisoned = no
+					}
+					save_scope_as = main_hunter
+				}
+				random_list = {
+					100 = {
+						trigger = {
+							exists = scope:main_hunter
+							NOR = {
+								has_game_rule = low_whunters
+								exists = global_var:magic_grand_coalition_start
+								exists = global_var:magic_grand_coalition_done
+								any_living_character = {
+									has_character_flag = may_has_wh_coalition_war_flag
+								}
+							}
+							any_ruler = {
+								has_trait = demon
+								is_ai = no
+								dread > 20
+								is_imprisoned = no
+								NOR = {
+									has_strong_hook = scope:main_hunter
+									has_relation_mmaster = scope:main_hunter
+									has_relation_mminion = scope:main_hunter
+								}
+								any_held_title = {
+									tier > tier_duchy
+								}
+							}
+						}
+						run_grand_coalition_effect_demon = yes
+					}
+					100 = {
+						trigger = {
+							NOR = {
+								has_game_rule = never_magic_endings
+								exists = global_var:abdul_alhazred_came_global
+								exists = global_var:us_magic_barrier_var
+							}
+							any_ruler = {
+								is_legendary_mage_trigger = yes
+								is_ai = no
+								is_imprisoned = no
+								any_character_artifact = {
+									has_variable = magic1
+									count > 1
+								}
+							}
+						}
+						#if = {
+						#	limit = {
+						#		exists = global_var:us_magic_barrier_var
+						#	}
+						#	random = {
+						#		chance = 50
+						#		run_abdul_alhazred_effect = yes
+						#	}
+						#}
+						#else = {
+						#	run_abdul_alhazred_effect = yes
+						#}
+						#random_ruler = {
+						#	limit = {
+						#		is_ai = no
+						#	}
+						#	send_interface_toast = {
+						#		title = test
+						#		show_as_tooltip = {
+						#			add_trait = yaga
+						#		}
+						#	}
+						#}
+						run_abdul_alhazred_effect = yes
+					}
+					1 = {
+						
+					}
+				}
+			}
+			25 = {
+				#special for mage rulership
+				trigger = {
+					any_ruler = {
+						culture = {
+							has_cultural_tradition = mage_rulership_tradition
+						}
+						is_imprisoned = no
+						is_adult = yes
+						OR = {
+							has_trait = archmage
+							has_trait = true_witch
+							has_focus = arcane_focus
+						}
+						exists = liege
+						NOT = {
+							liege = THIS
+						}
+						liege = {
+							is_adult = yes
+							culture = {
+								has_cultural_tradition = mage_rulership_tradition
+							}
+						}
+					}
+				}
+
+				random_ruler = {
+					limit = {
+						culture = {
+							has_cultural_tradition = mage_rulership_tradition
+						}
+						is_imprisoned = no
+						is_adult = yes
+						OR = {
+							has_trait = archmage
+							has_trait = true_witch
+							has_focus = arcane_focus
+						}
+						exists = liege
+						liege = {
+							is_adult = yes
+							culture = {
+								has_cultural_tradition = mage_rulership_tradition
+							}
+						}
+					}
+					trigger_event = {
+						id = magic_ev6.36 
+						days = { 1 360 }
+					}
+				}
+			}
+		}
+		#random_ruler = {
+		#	limit = {
+		#		is_ai = no
+		#	}
+		#	send_interface_toast = {
+		#		title = test
+		#	}
+		#}
+	}
+}
+
 #main witch hunter strikes
 snd_ev2.17 = { # magic_ev2.17 = {
 	title = ev2.17.title
@@ -534,6 +944,7 @@ snd_ev2.10 = { # magic_ev4.10 = {
 			scope:recipient = {
 				any_held_title = {
 					OR = {
+						#tier > tier_duchy
 						tier = tier_empire
 						#tier = tier_kingdom
 					}
