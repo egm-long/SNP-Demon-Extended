@@ -14,6 +14,7 @@
  snd_doctrine_demonism_accepted_desc:0 "Demon have just as much right to exist in this world as anyone."
  snd_doctrine_demonism_virtuous_name:0 "Virtuous"
  snd_doctrine_demonism_virtuous_desc:0 "These monsters should be looked upon with admiration, and worshipped."
+ 
 
  snd_turn_into_demon:0 "Confer Demon"
  snd_turn_into_demon_interaction_desc:0 "Confer Demon"
@@ -159,3 +160,7 @@ demon_focus_desc:0 "Follow the path of the Evolution of yourself"
  ev2.45.desc:0 "Your forces are ready for war. At least some of the rulers who are not currently fighting any wars can give you their support."
  ev2.45.0.a:0 "Well, it's time for war!"
  ev2.45.0.b_ct:0 "You will reconsider this in three months' time."
+
+hunter_veterans:0 "Hunter Veterans"
+hunter_veterans_flavor:0 "#F The best Trained Hunters money can buy.#!"
+

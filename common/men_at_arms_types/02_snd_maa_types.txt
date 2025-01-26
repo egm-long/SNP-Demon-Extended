@@ -104,3 +104,36 @@ demon_knights = {
 	max_sub_regiments = 6
 	stack = 100
 }
+
+hunter_veterans = {
+	type = heavy_infantry
+	icon = heavy_infantry
+
+	can_recruit = {
+		has_trait = supernatural_hunter
+	}
+	
+	
+	
+	damage = 100
+	toughness = 100
+	pursuit = 15
+	screen = 40
+
+	counters = {
+		skirmishers = 1
+		heavy_infantry = 0.75
+		light_cavalry = 0.75
+		archer_cavalry = 0.5
+		archers = 0.5
+		supernatural_monster = 0.2
+		supernatural_animal = 0.25
+	}
+	
+	buy_cost = { prestige = 150 gold = 100}
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost piety = skirmisher_low_maint_cost prestige = pikemen_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost piety = skirmisher_low_maint_cost prestige = pikemen_low_maint_cost }
+	
+	max_sub_regiments = -1
+	stack = 100
+}

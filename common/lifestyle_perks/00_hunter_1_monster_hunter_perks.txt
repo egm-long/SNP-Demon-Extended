@@ -85,6 +85,7 @@ upstanding_perk = {
 	}
 	
 	character_modifier = {
+		vassal_opinion = -100
 		close_relative_opinion = 25
 		general_opinion = 30
 		attraction_opinion = 35
@@ -140,10 +141,13 @@ born_leader_perk = {
 	}
 		
 	character_modifier = {
-		men_at_arms_cap = 3
+		men_at_arms_cap = 8
+		men_at_arms_limit = 8
+		men_at_arms_maintenance = -0.5
+
 		counter_efficiency = 0.30
 		knight_limit = 8
-		knight_effectiveness_mult = 0.50
+		knight_effectiveness_mult = 0.70
 		holy_order_hire_cost_mult = -0.45
 	}
 }
@@ -215,6 +219,8 @@ witcher_perk = {
 	position = { 1.25 2 }
 	icon = witcher
 
+	trait = balanced_conqueror
+
 	can_be_picked = {
 		has_hunter_trigger = yes
 	}
@@ -222,7 +228,14 @@ witcher_perk = {
 	parent = tossacoin_perk
 	
 	character_modifier = {
-		life_expectancy = 50
-		positive_random_genetic_chance = 0.35
+		life_expectancy = 35
+		positive_random_genetic_chance = 0.10
+		monthly_income = 10
 	}
+
+	effect = {
+		add_trait_force_tooltip = balanced_conqueror
+	}
+
+
 }
