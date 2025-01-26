@@ -7,11 +7,11 @@
 				OR = {
 					has_trait = witch_hunter
 					has_trait = supernatural_hunter
-				}
-				has_trait_xp = {
-					trait = supernatural_hunter
-					track = witch_hunting
-					value > 29
+					has_trait_xp = {
+						trait = supernatural_hunter
+						track = witch_hunting
+						value > 29
+					}
 				}
 				is_imprisoned = no
 		}
