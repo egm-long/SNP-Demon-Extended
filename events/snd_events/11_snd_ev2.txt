@@ -1,1 +1,999 @@
-﻿
+﻿namespace = snd_ev2
+
+#witch hunter management
+snd_ev2.1 = { # magic_ev2.15 = {
+	hidden = yes
+	#type = empty
+	scope = none
+	trigger = {
+		#has_game_rule = normal_whunters
+		NOT = {
+			has_game_rule = low_whunters
+		}
+		any_living_character = {
+			is_ai = no
+			OR = {
+				#has_focus = witch_focus
+				has_trait = demon
+			}
+		}
+	}
+	immediate = {
+		random = {
+			chance = 10
+			modifier = {
+				add = 90
+				any_living_character = {
+					has_trait = demon
+					is_ai = no
+				}
+			}
+			random_list = {
+				500 = {
+					#new main witch hunter
+					trigger = {
+						NOT = {
+							any_living_character = {
+								has_character_modifier = inq_modifier
+							}
+						}
+					}
+					random_ruler = {
+						limit = {
+							is_ai = no
+						}
+						save_scope_as = hplayer0
+					}
+					random_ruler = {
+						limit = {
+							is_alive = yes
+							is_imprisoned = no
+							is_adult = yes
+							is_landed_or_landless_administrative = yes
+							trait_is_criminal_in_faith_trigger = { TRAIT = witch FAITH = this.faith GENDER_CHARACTER = this }
+							#primary_title = { is_mercenary_company = no }
+							highest_held_title_tier > tier_county
+							in_diplomatic_range = scope:hplayer0
+							#capital_province = {
+							#	OR = {
+							#		geographical_region = world_asia_minor
+							#		geographical_region = world_europe
+							#	}	
+							#}
+							#has_council_position = councillor_court_chaplain
+							#liege = {
+							#	is_independent_ruler = yes
+							#}
+							#OR = {
+							#	is_independent_ruler = yes
+							#	liege = {
+							#		is_independent_ruler = yes
+							#	}
+							#}
+							has_trait = zealous
+							NOR = {
+								has_trait = witch
+								has_trait = true_witch
+								has_trait = archmage
+								has_focus = witch_focus
+								has_focus = arcane_focus
+								has_trait = demon
+							}
+						}
+						trigger_event = {
+							id = magic_ev2.16
+							days = { 1 360 }
+						}
+					}
+				}
+				500 = {
+					#remove main witch hunter
+					trigger = {
+						any_living_character = {
+							has_character_modifier = inq_modifier
+							is_landed_or_landless_administrative = no
+						}
+					}
+					random_living_character = {
+						limit = {
+							has_character_modifier = inq_modifier
+						}
+						remove_character_modifier = inq_modifier
+					}
+				}
+				100 = {
+					#main witch hunter strikes
+					trigger = {
+						any_living_character = {
+							has_character_modifier = inq_modifier
+							is_imprisoned = no
+							is_landed_or_landless_administrative = yes
+							#NOT = {
+							#	any_scheme = {
+							#		scheme_type = murder
+							#	}
+							#}
+							#NOT = {
+							#	any_scheme = {
+							#		scheme_type = abduct
+							#	}
+							#}	
+						}
+						any_living_character = {
+							NOT = {	has_character_flag = special_magic_character	}
+							OR = {
+								has_trait = demon
+							}
+							is_imprisoned = no
+							is_ai = no
+							NOT = { has_character_flag = clean4charges }
+							NOT = { has_character_flag = hunted4magic }
+						}
+					}
+					random_ruler = {
+						limit = {
+							NOT = {	has_character_flag = special_magic_character	}
+							is_alive = yes
+							has_character_modifier = inq_modifier
+							#is_imprisoned = no
+							#NOT = {
+							#	any_scheme = {
+							#		scheme_type = murder
+							#	}
+							#}
+							#NOT = {
+							#	any_scheme = {
+							#		scheme_type = abduct
+							#	}
+							#}
+							#is_landed_or_landless_administrative = yes
+						}
+						trigger_event = {
+							id = snd_ev2.17 # magic_ev2.17
+							days = { 1 360 }
+						}
+					}
+				}
+				20 = {
+					#remove hunted
+					trigger = {
+						any_living_character = {
+							has_character_flag = hunted4magic
+						}
+					}
+					random_living_character = {
+						limit = {
+							has_character_flag = hunted4magic
+						}
+						remove_character_flag = hunted4magic
+					}
+					
+				}
+				#100 = {
+				#	#new perk4ai
+				#	
+				#	random_living_character = {
+				#		limit = {
+				#			is_ai = yes
+				#			OR = {
+				#				has_focus = witch_focus
+				#				has_focus = arcane_focus
+				#			}
+				#		}
+				#		trigger_event = {
+				#			id = magic_ev2.21
+				#			days = { 1 360 }
+				#		}
+				#	}
+				#	
+				#}
+				100 = {
+
+				}
+			}
+		}
+	}
+}
+
+#main witch hunter strikes
+snd_ev2.17 = { # magic_ev2.17 = {
+	title = ev2.17.title
+	type = character_event
+	desc = ev2.17.desc
+	theme =  witchcraft
+	left_portrait = root
+	right_portrait = scope:demon
+	trigger = {
+		is_alive = yes
+		is_imprisoned = no
+		is_incapable = no
+		NOR = {
+			any_relation = {
+				type = mminion
+			}
+			any_relation = {
+				type = mmaster
+			}
+		}
+	}
+	immediate = {
+		random_living_character = {
+			limit = {
+				NOT = {	has_character_flag = special_magic_character	}
+				OR = {
+					has_trait = demon
+				}
+				is_ai = no
+				is_imprisoned = no
+				NOT = { has_character_flag = clean4charges }
+				NOT = { has_character_flag = hunted4magic }
+				NOT = {	has_strong_hook = root	}
+				NOR = {
+					has_relation_mminion = root
+					has_relation_mmaster = root
+				}
+			}
+			save_scope_as = demon
+		}
+		if = {
+			limit = {
+				NOT = { exists = scope:demon }
+			}
+			random_living_character = {
+				limit = {
+					NOT = {	has_character_flag = special_magic_character	}
+					OR = {
+						has_trait = demon
+					}
+					#is_ai = no
+					is_imprisoned = no
+					NOT = { has_character_flag = clean4charges }
+					NOT = { has_character_flag = hunted4magic }
+					NOT = {	has_strong_hook = root	}
+					NOR = {
+						has_relation_mminion = root
+						has_relation_mmaster = root
+					}
+				}
+				save_scope_as = demon
+			}
+		}
+	}
+	option = {
+		name = ev2.17.a
+		trigger = {
+			in_diplomatic_range = scope:demon
+		}
+		start_scheme = {
+			type = abduct
+			target_character = scope:demon
+		}
+		random = {
+			chance = 50
+			scope:demon = {
+				if = {
+					limit = {
+						trait_is_criminal_in_faith_trigger = { TRAIT = demon FAITH = this.faith GENDER_CHARACTER = this }
+						NOT = {
+							has_character_modifier = tracked_by_witch_hunter_modifier
+						}
+					}
+					add_character_modifier = {
+						modifier = tracked_by_witch_hunter_modifier
+						years = 2
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 200
+			modifier = {
+				add = -200
+				any_scheme = {
+					scheme_type = abduct
+				}
+			}
+		}
+	}
+	option = {
+		name = stop_the_demon
+		trigger = {
+			in_diplomatic_range = scope:demon
+		}
+		save_scope_as = actor
+		scope:demon = {
+			save_scope_as = recipient
+		}
+		trigger_event = snd_ev2.10
+		ai_chance = {
+			base = 150
+			modifier = {
+				add = -150
+				any_scheme = {
+					scheme_type = abduct
+					#scheme_target = scope:demon
+				}
+			}
+		}
+	}
+	option = {
+		name = ev2.17.c
+		custom_tooltip = ev2.17.c_ct
+		scope:demon = {
+			random_vassal = {
+				save_scope_as = rvas
+			}
+			if = {
+				limit = {
+					NOT = {
+						exists = scope:rvas
+					}
+				}
+				root = {
+					save_scope_as = rvas
+				}
+			}
+			add_character_flag = hunted4magic
+			if = {
+				limit = {
+					trait_is_criminal_in_faith_trigger = { TRAIT = demon FAITH = this.faith GENDER_CHARACTER = this }
+					NOT = {
+						has_character_modifier = tracked_by_witch_hunter_modifier
+					}
+				}
+				add_character_modifier = {
+					modifier = tracked_by_witch_hunter_modifier
+					years = 2
+				}
+			}
+		}
+		hidden_effect = {
+			spawn_witch_hunter_full_chance_effect = { EMPL = scope:rvas }
+			scope:whunter = {
+				random_list = {
+					10 = { add_character_modifier = witchhunter_weapons_modifier }
+					10 = { add_intrigue_skill = 1 }
+					10 = {  }
+				}
+				if = {
+					limit = {
+						has_game_rule = high_whunters
+					}
+					add_intrigue_skill = 8
+					add_prowess_skill = 8
+				}
+				start_scheme = {
+					type = murder
+					target_character = scope:demon
+				}
+			}
+			add_hook = {
+				type = loyalty_hook
+				target = scope:whunter
+			}
+		}
+		ai_chance = {
+			base = 60
+		}
+	}
+	option = {
+		name = ev2.17.b
+		if = {
+			limit = {
+				NOT = {
+					has_character_modifier = preparation_for_strike_modifier
+				}
+			}
+			add_character_modifier = {
+				modifier = preparation_for_strike_modifier
+				years = 5
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = high_whunters
+			}
+			add_intrigue_skill = 1
+		}
+		add_gold = 100
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 40
+				any_scheme = {
+					scheme_type = abduct
+					scheme_target_character = scope:demon
+				}
+			}
+			modifier = {
+				add = -35
+				has_character_modifier = preparation_for_strike_modifier
+			}
+			modifier = {
+				add = 200
+				has_trait = craven
+				scope:demon = {
+					dread > 1
+				}
+			}
+			modifier = {
+				add = 20
+				NOT = {
+					has_game_rule = high_whunters
+				}
+			}
+			modifier = {
+				add = 100
+				scope:demon = {
+					dread > 80
+				}
+				NOT = {
+					has_game_rule = high_whunters
+				}
+			}
+			modifier = {
+				add = 100
+				has_trait = lazy
+			}
+		}
+	}
+	after = {
+		clear_saved_scope = demon
+	}
+}
+
+
+#stop the witch - landed demon
+snd_ev2.10 = { # magic_ev4.10 = {
+	title = ev4.2.title
+	desc = ev4.2.desc
+	theme =  intrigue_intimidation_focus
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	lower_right_portrait = scope:recipient
+
+	trigger = {
+		is_alive = yes
+		is_imprisoned = no
+		exists = scope:recipient
+		scope:recipient = {
+			is_alive = yes
+			is_imprisoned = no
+		}
+	}
+
+	immediate = {
+		save_scope_as = whunter
+		if = {
+			limit = {
+				OR = {
+					any_courtier_or_guest = {
+						OR = {
+							has_trait = witch_hunter
+							has_trait = supernatural_hunter	
+						}
+					}
+					any_vassal_or_below = {
+						OR = {
+							has_trait = witch_hunter
+							has_trait = supernatural_hunter	
+						}
+					}
+				}
+			}
+			random_courtier_or_guest = {
+				limit = {							
+					OR = {
+					has_trait = witch_hunter
+					has_trait = supernatural_hunter	
+					}
+				}
+				save_scope_as = helper
+			}
+			if = {
+				limit = {
+					NOT = {	exists = scope:helper	}
+				}
+				random_vassal_or_below = {
+					limit = {	
+						OR = {
+							has_trait = witch_hunter
+							has_trait = supernatural_hunter	
+						}
+						is_ai = yes	
+					}
+					save_scope_as = helper
+				}
+			}
+		}
+		
+		
+		if = {
+			limit = {
+				NOT = {	exists = scope:helper	}
+				exists = cp:councillor_spymaster
+			}
+			root.cp:councillor_spymaster = {
+				save_scope_as = helper
+			}
+		}
+	}
+	option = {
+		#Grand Coalition
+		name = ev4.10.0.d
+		trigger = {
+			#OR = {
+			#	scope:recipient.highest_held_title_tier = tier_empire
+			#	scope:recipient.highest_held_title_tier = tier_kingdom
+			#}
+			prestige_level >= very_high_prestige_level
+		}
+		show_as_unavailable = {
+			scope:recipient = {
+				any_held_title = {
+					OR = {
+						tier = tier_empire
+						#tier = tier_kingdom
+					}
+				}
+			}
+			NOR = {
+				has_character_flag = starts_grand_coalition_war
+				has_truce = scope:recipient
+				is_allied_to = scope:recipient
+				scope:recipient = {
+					has_strong_hook = ROOT
+				}
+			}
+		}
+		custom_tooltip = ev4.10.0.d_ct
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_character_flag = starts_grand_coalition_war
+					}
+				}
+				add_character_flag = starts_grand_coalition_war
+			}
+		}
+		trigger_event = {
+			id = snd_ev2.42
+			days = { 20 30 }
+		}
+		ai_chance = {
+			base = 15
+		}
+	}
+	option = {
+		#helper handle it
+		trigger = {
+			exists = scope:helper
+		}
+		name = ev4.10.0.b
+		custom_tooltip = ev4.10.0.b_ct
+		scope:helper = {
+			start_scheme = {
+				type = murder
+				target_character = scope:recipient
+			}
+			if = {
+				limit = {
+					has_trait = witch_hunter
+				}
+				hidden_effect = {
+					random_scheme = {
+						limit = {
+							scheme_type = murder
+							scheme_target_character = scope:recipient
+						}
+						add_scheme_modifier = {
+							type = witch_hunter_hunts_modifier
+						}
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+	#option = {
+	#	#Plan must be prepared
+	#	name = ev4.10.0.c
+	#	custom_tooltip = hunt_witch_lord_ps
+	#	if = {
+	#		limit = {
+	#			scope:recipient = {
+	#				is_landed_or_landless_administrative = yes
+	#			}
+	#		}
+	#		trigger_event = {
+	#			id = magic_ev4.31 #TODO
+	#			days = { 20 30 }
+	#		}
+	#	}
+		
+	#	ai_chance = {
+	#		base = 5
+	#	}
+	#}
+}
+
+
+#Grand Coalition invitation
+snd_ev2.41 = {
+	type = letter_event
+	opening = ev2.41.opening
+	desc = ev2.41.desc
+	sender = scope:attacker
+
+	trigger = {
+		is_imprisoned = no
+		exists = scope:war
+		NOR = {
+			scope:defender.liege = ROOT
+			scope:attacker = ROOT
+			scope:defender = ROOT
+		}
+	}
+	option = {
+		name = ev2.41.0.a
+		add_prestige = medium_prestige_gain
+		scope:war = {
+			add_attacker = ROOT
+		}
+		ai_chance = {
+			base = 5
+			modifier = {
+				add = 10
+				OR = {
+					has_trait = brave
+					has_trait = witch_hunter
+					has_trait = supernatural_hunter
+				}
+			}
+			modifier = {
+				add = 10
+				has_trait = sadistic
+			}
+			modifier = {
+				add = 5
+				has_trait = callous
+			}
+			modifier = {
+				add = -5
+				is_witch_trigger = yes
+			}
+			modifier = {
+				add = 100
+				OR = {
+					has_relation_rival = scope:defender
+					has_relation_nemesis = scope:defender
+				}
+			}
+		}
+	}
+	option = {
+		name = ev2.41.0.b
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 10
+				has_trait = craven
+			}
+			modifier = {
+				add = 5
+				has_trait = compassionate
+				NOT = {
+					has_trait = just
+				}
+			}
+			modifier = {
+				add = 20
+				#OR = {
+					is_witch_trigger = yes
+					#has_trait = witch_hunter2
+				#}
+			}
+			modifier = {
+				add = 1000
+				OR = {
+					has_relation_friend = scope:defender
+					has_relation_best_friend = scope:defender
+					has_relation_lover = scope:defender
+					has_relation_soulmate = scope:defender
+					has_relation_mmaster = scope:defender
+					has_relation_mminion = scope:defender
+					has_relation_rival = scope:attacker
+					has_relation_nemesis = scope:attacker
+					scope:attacker = {
+						has_strong_hook = root
+					}
+				}
+			}
+		}
+	}
+}
+#Grand Coalition begins
+snd_ev2.42 = {
+	title = ev2.42.title
+	desc = ev2.42.desc
+	theme = realm
+	left_portrait = {
+		character = root
+		animation = spymaster
+	}
+	lower_right_portrait = scope:recipient
+	trigger = {
+		is_alive = yes
+		is_imprisoned = no
+	}
+	immediate = {
+		hidden_effect = {
+			scope:recipient = {
+				if = {
+					limit = {
+						NOT = {
+							has_character_flag = may_has_wh_coalition_war_flag
+						}
+					}
+					add_character_flag = {
+						flag = may_has_wh_coalition_war_flag
+						years = 3
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = epidemic_events.1020.a # It's worth a try.
+		scope:recipient = {
+			trigger_event = {
+				id = snd_ev2.43
+				days = 3
+			}
+		}
+		if = {
+			limit = {
+				is_ai = yes
+				NOT = {
+					has_character_modifier = amp_modifier
+				}
+			}
+			add_character_modifier = {
+				modifier = amp_modifier
+				years = 10
+			}
+		}
+		if = {
+			limit = {
+				is_ai = yes
+				NOT = {
+					has_character_modifier = double_guards_modifier
+				}
+			}
+			add_character_modifier = {
+				modifier = double_guards_modifier
+				years = 10
+			}
+		}
+	}
+}
+#Grand Coalition ultimatum
+snd_ev2.43 = {
+	type = letter_event
+	opening = ev2.43.opening
+	desc = ev2.43.desc
+	sender = scope:actor
+	option = {
+		name = ev2.43.0.c
+		trigger = {
+			OR = {
+				has_trait = wrathful
+				has_trait = irritable
+			}
+		}
+		add_prestige = minor_prestige_gain
+		custom_tooltip = ev2.43.0.a_ct
+		hidden_effect = {
+			scope:actor = {
+				trigger_event = {
+					id = snd_ev2.44
+					days = 7
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		name = ev2.43.0.a
+		custom_tooltip = ev2.43.0.a_ct
+		hidden_effect = {
+			scope:actor = {
+				trigger_event = {
+					id = snd_ev2.44
+					days = 7
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		name = ev2.43.0.b
+		add_stress = minor_stress_gain
+		scope:actor = {
+			send_interface_toast = {
+				title = ev2.43.0.b_title
+				imprison = {
+					target = ROOT
+					type = dungeon
+				}
+			}
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+#Grand Coalition preparations
+snd_ev2.44 = {
+	title = ev2.42.title
+	desc = ev2.44.desc
+	theme = realm
+	left_portrait = {
+		character = root
+		animation = spymaster
+	}
+	lower_right_portrait = scope:recipient
+	trigger = {
+		is_alive = yes
+		is_imprisoned = no
+	}
+	on_trigger_fail = {
+		if = {
+			limit = {
+				is_imprisoned = yes
+			}
+			trigger_event = {
+				id = snd_ev2.44
+				months = 1
+			}
+		}
+	}
+	option = {
+		name = ev2.44.0.a
+		if = {
+			limit = {
+				is_ai = no
+			}
+			remove_short_term_gold = 200
+		}
+		
+		spawn_army = {
+			name = event_troop_default_name
+			men_at_arms = {
+				type = horse_archers
+				stacks = 2
+			}
+			men_at_arms = {
+				type = armored_footmen
+				stacks = 5
+			}
+			men_at_arms = {
+				type = bowmen
+				stacks = 5
+			}
+			men_at_arms = {
+				type = light_footmen
+				stacks = 5
+			}
+			men_at_arms = {
+				type = teutonic_knights
+				stacks = 5
+			}
+			men_at_arms = {
+				type = pikemen_unit
+				stacks = 5
+			}
+			location = root.capital_province
+			uses_supply = yes
+  	 		inheritable = no
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		name = ev2.44.0.b
+		ai_chance = {
+			base = 0
+		}
+	}
+	after = {
+		trigger_event = {
+			id = snd_ev2.45
+			months = 2
+		}
+	}
+}
+
+#Grand Coalition - may strike
+snd_ev2.45 = {
+	title = ev2.42.title
+	desc = ev2.45.desc
+	theme = realm
+	left_portrait = {
+		character = root
+		animation = spymaster
+	}
+	lower_right_portrait = scope:recipient
+	trigger = {
+		is_alive = yes
+		is_ruler = yes
+		is_imprisoned = no
+		#is_at_war = no
+		NOT = {
+			is_at_war_with = scope:recipient
+		}
+		exists = scope:recipient
+		scope:recipient = {
+			is_alive = yes
+			is_independent_ruler = yes
+			is_imprisoned = no
+		}
+	}
+	on_trigger_fail = {
+		if = {
+			limit = {
+				exists = scope:recipient
+				OR = {
+					is_imprisoned = yes
+					is_at_war_with = scope:recipient
+					scope:recipient = {
+						is_imprisoned = yes
+					}
+				}
+			}
+			trigger_event = {
+				id = snd_ev2.45
+				months = 1
+			}
+		}
+	}
+	option = {
+		name = ev2.45.0.a
+		every_character_war = {
+			end_war = white_peace
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					has_truce = scope:recipient
+				}
+				cancel_truce_both_ways = scope:recipient
+			}
+		}
+		start_war = {
+			target = scope:recipient
+			casus_belli = against_the_demon_war
+		}
+	}
+	option = {
+		name = ev7.96.e	 #"This is not the right time."
+		custom_tooltip = ev2.45.0.b_ct
+		hidden_effect = {
+			trigger_event = {
+				id = snd_ev2.45
+				months = 3
+			}
+		}
+	}
+}

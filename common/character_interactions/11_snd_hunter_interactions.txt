@@ -1,0 +1,94 @@
+﻿stop_the_demon = {
+	is_shown = {
+		NOT = { scope:recipient = scope:actor }
+		scope:actor = {
+				is_ruler = yes
+				is_adult = yes
+				OR = {
+					has_trait = witch_hunter
+					has_trait = supernatural_hunter
+				}
+				has_trait_xp = {
+					trait = supernatural_hunter
+					track = witch_hunting
+					value > 29
+				}
+				is_imprisoned = no
+		}
+		scope:recipient = {
+			is_adult = yes
+			is_imprisoned = no
+			OR = {
+				has_trait = demon
+			}
+		}	
+	}
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			custom_description = {
+				text = has_hook_on_you_custom
+				NOT = { has_hook = scope:actor }
+			}
+		}
+	}
+	icon = torture_interaction
+	common_interaction = yes
+	interface_priority = 90
+	popup_on_receive = no
+	category = interaction_category_hostile
+	desc = stop_the_witch_desc
+	#cooldown_against_recipient = { years = 4 } 
+	#cooldown = { years = 4 } 
+
+	cooldown_against_recipient = { years = 2 } 
+	cooldown = { years = 2 } 
+	ignores_pending_interaction_block = yes
+	use_diplomatic_range = yes
+	
+	on_accept = {
+		scope:actor = {
+			
+			send_interface_message = {
+				type = event_toast_effect_neutral
+				title = stop_the_witch
+				desc = "send_interface_message_text"
+				left_icon = scope:actor
+				right_icon = scope:recipient
+				custom_tooltip = stop_the_witch_ct
+				#custom_tooltip = witch_trial_ct3
+				#tooltip="tooltip0"
+				stress_impact = {
+					compassionate = minor_stress_impact_gain
+				}
+				scope:recipient = {
+					custom_tooltip = stop_the_witch_ct2
+				}
+				if = {
+					limit = {
+						scope:recipient = {
+							is_landed_or_landless_administrative = yes
+						}
+					}
+					trigger_event = {
+						id = snd_ev2.10
+						#days = { 2 5 }
+					}
+				}
+				#else = { TODO
+				#	trigger_event = {
+				#		id = magic_ev4.2
+				#		#days = { 2 4 }
+				#	}
+				#}
+				else = {
+					trigger_event = {
+						id = snd_ev2.10
+						days = { 2 4 }
+					}
+				}
+			}
+		}
+	}
+	
+	auto_accept = yes
+}

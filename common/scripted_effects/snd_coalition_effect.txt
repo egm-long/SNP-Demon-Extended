@@ -1,0 +1,69 @@
+﻿run_grand_coalition_effect_demon = {
+	if = {
+		limit = {
+			any_ruler = {
+				OR = {
+					has_trait = witch_hunter
+					has_trait = supernatural_hunter
+				}	
+				has_character_modifier = inq_modifier
+				is_ai = yes
+				is_imprisoned = no
+			}
+		}
+		random_ruler = {
+			limit = {
+				OR = {
+					has_trait = witch_hunter
+					has_trait = supernatural_hunter
+				}
+				has_character_modifier = inq_modifier
+				is_ai = yes
+				is_imprisoned = no
+			}
+			if = {
+				limit = {
+					has_trait = incapable
+				}
+				remove_trait = incapable
+			}
+			save_scope_as = actor
+		}
+		random_ruler = {
+			limit = {
+				has_trait = demon
+				is_ai = no
+				dread > 20
+				is_imprisoned = no
+				NOR = {
+					has_strong_hook = scope:actor
+					has_relation_mmaster = scope:actor
+					has_relation_mminion = scope:actor
+				}
+				any_held_title = {
+					#tier = tier_empire
+					tier > tier_duchy
+				}
+			}
+			save_scope_as = recipient
+		}
+		if = {
+			limit = {
+				exists = scope:actor
+				exists = scope:recipient
+			}
+			scope:actor = {
+				trigger_event = {
+					id = snd_ev2.42
+					days = { 1 61 }
+				}
+			}
+		}
+		else = {
+			#debug_log = test_test_decision_desc
+		}
+	}
+	else = {
+		#debug_log = test_test_decision_tooltip
+	}
+}
