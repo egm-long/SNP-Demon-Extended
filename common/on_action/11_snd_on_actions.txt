@@ -4,3 +4,10 @@ on_game_start_after_lobby = {
 		snd_assign_all_religions_immortal_doctrines
 	}
 }
+
+
+yearly_global_pulse = {
+	events = {
+		snd_ev2.1
+	}
+}
