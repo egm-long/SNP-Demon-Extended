@@ -251,99 +251,7 @@ snd_ev2.2 = { # magic_ev2.1 = {
 					#trigger_event = magic_ev.100
 				}
 			}
-			30 = {
-				#ring of life paranoia/special
-				trigger = {
-					any_ruler = {
-						is_ai = no
-						any_character_artifact = {
-							has_variable = magic_ring0
-							has_artifact_modifier = artifact_ring_of_life_modifier
-						}
-					}
-				}
-				if = {
-					limit = {
-						any_ruler = {
-							is_ai = no
-							any_character_artifact = { has_variable = magic_ring0 }
-							NOT = {	has_character_flag = ring_of_life_paranoia	}
-						}
-					}
-					random_ruler = {
-						limit = {
-							is_ai = no
-							any_character_artifact = { has_variable = magic_ring0 }
-							NOT = {	has_character_flag = ring_of_life_paranoia	}
-						}
-						trigger_event = {
-							id = magic_ev4.51
-							days = { 1 360 }
-						}
-					}
-				}
-			}
-			70 = {
-				#preemptive strike
-				trigger = {
-					any_ruler = {
-						NOT = {
-							has_character_flag = special_magic_character
-						}
-						OR = {
-							has_trait = archmage
-							has_focus = arcane_focus
-							has_trait = demon
-						}
-						OR = {
-							any_relation = {
-								type = rival
-								OR = {
-									has_trait = archmage
-									has_focus = arcane_focus
-								}
-							}
-							any_relation = {
-								type = nemesis
-								OR = {
-									has_trait = archmage
-									has_focus = arcane_focus
-								}
-							}
-						}
-					}
-				}
-				random_ruler = {
-					limit = {
-						NOT = {	has_character_flag = special_magic_character	}
-						OR = {
-							has_trait = demon
-						}
-						OR = {
-							any_relation = {
-								type = rival
-								OR = {
-									has_trait = archmage
-									has_focus = arcane_focus
-								}
-							}
-							any_relation = {
-								type = nemesis
-								OR = {
-									has_trait = archmage
-									has_focus = arcane_focus
-								}
-							}
-						}
-						is_landed_or_landless_administrative = yes
-					}
-					trigger_event = {
-						id = magic_ev2.5
-						days = { 1 360 }
-					}
-				}
-			}
-			60 = {
+			40 = {
 				#rival for demon
 				trigger = {
 					any_living_character = {
@@ -395,47 +303,7 @@ snd_ev2.2 = { # magic_ev2.1 = {
 					}
 				}
 			}
-			60 = {
-				#magic catalyst/darkblade/singularity/crown turn ai into witch
-				trigger = {
-					any_living_character = {
-						NOR = {
-							has_trait = witch
-							any_secret = { secret_type = secret_witch }
-							has_character_flag = used_catalyst
-						}
-						OR = {
-							any_character_artifact = { has_variable = catalyst }
-							any_character_artifact = { has_variable = singularity }
-							any_character_artifact = { has_variable = dark_blade }
-							any_character_artifact = { has_variable = magic_crown }
-						}
-						
-						is_ai = yes
-						is_adult = yes
-					}
-				}
-				random_living_character = {
-					limit = {
-						NOR = {
-							has_trait = witch
-							any_secret = { secret_type = secret_witch }
-							has_character_flag = used_catalyst
-						}
-						OR = {
-							any_character_artifact = { has_variable = catalyst }
-							any_character_artifact = { has_variable = singularity }
-							any_character_artifact = { has_variable = dark_blade }
-							any_character_artifact = { has_variable = magic_crown }
-							has_power_place_trigger = yes
-						}
-						is_ai = yes
-						is_adult = yes
-					}
-					trigger_event = magic_ev2.23
-				}
-			}
-			60 = {
+			120 = {
 				#ending crises
 				trigger = {
 					NOT = {
@@ -465,7 +333,7 @@ snd_ev2.2 = { # magic_ev2.1 = {
 					save_scope_as = main_hunter
 				}
 				random_list = {
-					100 = {
+					500 = {
 						trigger = {
 							exists = scope:main_hunter
 							NOR = {
@@ -492,48 +360,6 @@ snd_ev2.2 = { # magic_ev2.1 = {
 							}
 						}
 						run_grand_coalition_effect_demon = yes
-					}
-					100 = {
-						trigger = {
-							NOR = {
-								has_game_rule = never_magic_endings
-								exists = global_var:abdul_alhazred_came_global
-								exists = global_var:us_magic_barrier_var
-							}
-							any_ruler = {
-								is_legendary_mage_trigger = yes
-								is_ai = no
-								is_imprisoned = no
-								any_character_artifact = {
-									has_variable = magic1
-									count > 1
-								}
-							}
-						}
-						#if = {
-						#	limit = {
-						#		exists = global_var:us_magic_barrier_var
-						#	}
-						#	random = {
-						#		chance = 50
-						#		run_abdul_alhazred_effect = yes
-						#	}
-						#}
-						#else = {
-						#	run_abdul_alhazred_effect = yes
-						#}
-						#random_ruler = {
-						#	limit = {
-						#		is_ai = no
-						#	}
-						#	send_interface_toast = {
-						#		title = test
-						#		show_as_tooltip = {
-						#			add_trait = yaga
-						#		}
-						#	}
-						#}
-						run_abdul_alhazred_effect = yes
 					}
 					1 = {
 						
