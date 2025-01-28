@@ -164,3 +164,9 @@ demon_focus_desc:0 "Follow the path of the Evolution of yourself"
 hunter_veterans:0 "Hunter Veterans"
 hunter_veterans_flavor:0 "#F The best Trained Hunters money can buy.#!"
 
+
+#Notification Demon
+ snd_received_demonism:0 "You've become a Demon"
+ snd_msg_received_demon_interaction_message:0 "A Demon was given to you."
+ snd_confered_demonsim:0 "Accepted Demonism"
+ snd_msg_confered_demon_interaction_message:0 "[THIS.GetCharacter.GetFirstNameNoTooltip] accepted the gift of Demonism and became a Demon."

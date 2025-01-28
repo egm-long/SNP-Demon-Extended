@@ -113,21 +113,19 @@ hunter_veterans = {
 		has_trait = supernatural_hunter
 	}
 	
-	
-	
 	damage = 100
 	toughness = 100
 	pursuit = 15
 	screen = 40
 
 	counters = {
-		skirmishers = 1
+		skirmishers = 1.5
 		heavy_infantry = 0.75
 		light_cavalry = 0.75
-		archer_cavalry = 0.5
+		archer_cavalry = 0.25
 		archers = 0.5
-		supernatural_monster = 0.2
-		supernatural_animal = 0.25
+		supernatural_monster = 0.6
+		supernatural_animal = 0.8
 	}
 	
 	buy_cost = { prestige = 150 gold = 100}

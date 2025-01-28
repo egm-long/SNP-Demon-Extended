@@ -36,9 +36,10 @@
 	is_shown = {
 		NOT = { scope:recipient = scope:actor}
 		scope:recipient = {
-			#spn_has_supernatural_trait = no
+			spn_has_supernatural_trait = no
 			NOR = {
-				has_trait = demon
+				#spn_has_supernatural_trait = yes
+				#has_trait = demon
 				has_trait = demon0
 				has_trait = supernatural_hunter
 			}
@@ -47,7 +48,7 @@
 		scope:actor = {
 			OR = {
 				has_trait = demon
-				}
+			}
 		}
 	}
 
@@ -461,14 +462,9 @@
 				} 
 
 				trigger_event = snd_initiate_events.1001 #Initialize demon
-				trigger_event = spn_message.1001 #Send Messages TODO
+				trigger_event = snd_initiate_events.1002 
 				
 				spn_assign_conferred_sire = { CHARACTER = scope:actor }
-
-				trigger_event = {
-					id = spn_initiate.9001 #Initiate Secret knowledge for conferring character
-					days = 1
-				}
 			}
 			else = {
 				random_list = {
@@ -508,14 +504,9 @@
 						}
 
 						trigger_event = snd_initiate_events.1001 #Initialize demon
-						trigger_event = spn_message.1001 #Send Messages TODO
+						trigger_event = snd_initiate_events.1002
 						
 						spn_assign_conferred_sire = { CHARACTER = scope:actor }
-
-						trigger_event = {
-							id = spn_initiate.9001 #Initiate Secret knowledge for conferring character
-							days = 1
-						}
 			
 						show_as_tooltip = {
 							if = { 

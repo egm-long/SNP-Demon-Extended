@@ -1,4 +1,4 @@
-spn_ask_to_turn_into_hunter = { #Ask Character to Train You As a Hunter
+﻿spn_ask_to_turn_into_hunter = { #Ask Character to Train You As a Hunter
 	category = interaction_category_uncategorized
 	common_interaction = yes
 	icon = hunter
