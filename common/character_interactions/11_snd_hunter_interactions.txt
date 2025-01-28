@@ -92,3 +92,669 @@
 	
 	auto_accept = yes
 }
+
+
+
+spn_turn_into_hunter = { # Train Character as a Hunter
+	category = interaction_category_uncategorized
+	common_interaction = yes
+	icon = hunter
+	desc = spn_turn_into_hunter_interaction_desc
+
+    ai_targets = {
+        ai_recipients = spouses
+        ai_recipients = children
+        ai_recipients = family
+        ai_recipients = dynasty
+        max = 3
+    }
+    ai_targets = {
+        ai_recipients = neighboring_rulers
+        ai_recipients = peer_vassals
+        ai_recipients = liege
+        max = 1
+    }
+    ai_targets = {
+        ai_recipients = courtiers
+        max = 1
+    }
+    ai_targets = {
+        ai_recipients = vassals
+        max = 1
+    }
+
+	ai_target_quick_trigger = {
+		adult = yes
+		prison = no
+	}
+
+	ai_frequency = 36
+
+	is_shown = {
+		NOT = { scope:recipient = scope:actor}
+		scope:recipient = {
+			NOR = { 
+				has_trait = supernatural_hunter
+				has_trait = supernatural_werewolf
+				has_trait = supernatural_vampire
+				has_trait = supernatural_hybrid
+				has_trait = demon
+			}
+		}
+		scope:actor = {
+			has_trait = supernatural_hunter
+		}
+	}
+
+	greeting = positive
+	notification_text = SPN_OFFER_HUNTER_INTERACTION_NOTIFICATION
+	ai_min_reply_days = 1
+	ai_max_reply_days = 5
+
+	ai_accept = {
+		base = -15
+
+		#MAIN
+		modifier = { #Different faith, no pluralism.
+			desc = offer_vassalization_interaction_aibehavior_differentfaith_tt
+			trigger = {
+				scope:recipient = {
+					NOR = { #Of two different faiths AND the potential vassal's faith is not pluralistic.
+						faith = scope:actor.faith
+						faith = { has_doctrine = doctrine_pluralism_pluralistic }
+					}
+				}
+			}
+			add = {
+				value = -15
+				if = {
+					limit = {
+						scope:recipient.faith = {
+							faith_hostility_level = {
+								target = scope:actor.faith
+								value >= faith_hostile_level
+							}
+						}
+					}
+					add = -40
+				}
+				if = {
+					limit = {
+						scope:recipient.faith = {
+							faith_hostility_level = {
+								target = scope:actor.faith
+								value >= faith_evil_level
+							}
+						}
+					}
+					add = -30
+				}
+			}
+		}
+		
+		modifier = { #Different faith, pluralism.
+			desc = offer_vassalization_interaction_aibehavior_differentfaith_tt
+			trigger = {
+				scope:recipient = {
+					NOT = {
+						faith = scope:actor.faith
+					}
+					NOT = {
+						scope:actor.faith = { has_doctrine = doctrine_pluralism_pluralistic }
+					}
+					faith = { has_doctrine = doctrine_pluralism_pluralistic }
+				}
+			}
+			add = {
+				value = -15
+				if = {
+					limit = {
+						scope:recipient.faith = {
+							faith_hostility_level = {
+								target = scope:actor.faith
+								value >= faith_hostile_level
+							}
+						}
+					}
+					add = -15
+				}
+				if = {
+					limit = {
+						scope:recipient.faith = {
+							faith_hostility_level = {
+								target = scope:actor.faith
+								value >= faith_evil_level
+							}
+						}
+					}
+					add = -15
+				}
+			}
+		}
+		
+		modifier = { #Different faith, both have pluralism.
+			desc = offer_vassalization_interaction_aibehavior_differentfaith_tt
+			trigger = {
+				scope:recipient = {
+					NOT = {
+						faith = scope:actor.faith
+					}
+					scope:actor.faith = { has_doctrine = doctrine_pluralism_pluralistic }
+					faith = { has_doctrine = doctrine_pluralism_pluralistic }
+				}
+			}
+			add = {
+				value = -10
+				if = {
+					limit = {
+						scope:recipient.faith = {
+							faith_hostility_level = {
+								target = scope:actor.faith
+								value >= faith_hostile_level
+							}
+						}
+					}
+					add = -10
+				}
+				if = {
+					limit = {
+						scope:recipient.faith = {
+							faith_hostility_level = {
+								target = scope:actor.faith
+								value >= faith_evil_level
+							}
+						}
+					}
+					add = -10
+				}
+			}
+		}
+
+		modifier = { #We just fought against each other.
+			desc = offer_vassalization_interaction_aibehavior_recent_war_tt
+			trigger = {
+				scope:recipient = {
+					any_truce_holder = {
+						this = scope:actor
+					}
+				}
+			}
+			add = -50
+		}
+
+		modifier = { #I fought an independence war against you.
+			desc = offer_vassalization_interaction_aibehavior_independence_war_tt
+			trigger = {
+				scope:recipient = {
+					exists = var:independence_war_former_liege
+					var:independence_war_former_liege = scope:actor
+				}
+			}
+			add = -70
+		}
+
+		modifier = { #Wide difference in rank
+			desc = offer_vassalization_interaction_aibehavior_widetitletier_tt
+			trigger = {
+				scope:actor = {
+					tier_difference = {
+						target = scope:recipient
+						value > 1
+					}
+				}
+			}
+			add = 20
+		}
+
+		modifier = { #Holds dejure liege title.
+			desc = offer_vassalization_interaction_aibehavior_rightfulliegetitleholder_tt
+			trigger = {
+				scope:recipient = {
+					is_landed = yes
+					highest_held_title_tier >= tier_barony
+				}
+				root = {
+					scope:actor = {
+						any_held_title = {
+							is_de_jure_liege_or_above_target = scope:recipient.primary_title
+						}
+					}
+				}
+			}
+			add = 15
+		}
+
+		modifier = { #Is not a de jure vassal.
+			desc = offer_vassalization_interaction_aibehavior_not_rightfulliegetitleholder_tt
+			trigger = {
+				scope:recipient = {
+					is_landed = yes
+					highest_held_title_tier >= tier_barony
+				}
+				root = {
+					NOT = {
+						scope:actor = {
+							any_held_title = {
+								is_de_jure_liege_or_above_target = scope:recipient.primary_title
+							}
+						}
+					}
+				}
+			}
+			add = -15
+		}
+
+		modifier = { #Military Power
+			desc = offer_vassalization_interaction_aibehavior_power_tt
+				add = {
+					value = 1
+						subtract = {
+						value = scope:recipient.max_military_strength
+						divide = { value = scope:actor.max_military_strength min = 1 }
+						}
+					multiply = 5
+					min = -25
+					max = 25
+				}
+		}
+
+		#MINOR
+
+		modifier = { #Friend modifier.
+			desc = offer_vassalization_interaction_aibehavior_friend_tt
+			trigger = {
+				scope:recipient = {
+					has_relation_friend = scope:actor
+					NOT = { has_relation_best_friend = scope:actor }
+				}
+			}
+			add = 20
+		}
+
+		modifier = { # Lovers and Best Friends are more likely to accept
+			desc = offer_vassalization_interaction_aibehavior_best_friend_tt
+			trigger = {
+				scope:recipient = {
+					OR = {
+						has_relation_lover = scope:actor
+						has_relation_best_friend = scope:actor
+					}
+				}
+			}
+			add = 30
+		}
+
+		modifier = { #Is a child of actor
+			desc = AI_YOUR_CHILD
+			trigger = {
+				scope:recipient = {
+					is_child_of = scope:actor
+				}
+			}
+			add = 40
+		}
+
+		modifier = { #Is a close family member of actor
+			desc = AI_YOUR_RELATIVE
+			trigger = {
+				scope:recipient = {
+					NOT = { is_child_of = scope:actor }
+					is_close_family_of = scope:actor
+				}
+			}
+			add = 25
+		}
+
+		modifier = { #Is your spouse
+			desc = AI_YOUR_SPOUSE
+			trigger = {
+				scope:recipient = {
+					is_spouse_of = scope:actor
+				}
+			}
+			add = 35
+		}
+
+		modifier = { #Rivalry modifier.
+			desc = offer_vassalization_interaction_aibehavior_rival_tt
+			trigger = {
+				scope:recipient = {
+					has_relation_rival = scope:actor
+					NOT = { has_relation_nemesis = scope:actor }
+				}
+			}
+			add = -35
+		}
+
+		modifier = { #Nemesis modifier.
+			desc = offer_vassalization_interaction_aibehavior_nemesis_tt
+			trigger = {
+				scope:recipient = {
+					has_relation_nemesis = scope:actor
+				}
+			}
+			add = -100
+		}
+
+		modifier = { #Same Dynasty modifier.
+			desc = offer_vassalization_interaction_aibehavior_dynasty_tt
+			trigger = {
+				scope:recipient = {
+					dynasty = scope:actor.dynasty
+				}
+			}
+			add = 10
+		}
+
+		modifier = { #Cultural modifiers.
+			add = -10
+			desc = offer_vassalization_interaction_aibehavior_culture_tt
+			trigger = {
+				scope:actor = {
+					NOT = { culture = { has_same_culture_heritage = scope:recipient.culture } }
+				}
+			}
+		}
+		
+		modifier = { #Cultural Group modifiers.
+			add = -15
+			desc = offer_vassalization_interaction_aibehavior_culture_group_tt
+			trigger = {
+				scope:actor = {
+					NOT = { culture = { has_same_culture_heritage = scope:recipient.culture } }
+				}
+			}
+		}
+
+		modifier = { #Ageism modifier vs kids.
+			desc = offer_vassalization_interaction_aibehavior_child_tt
+			trigger = {
+				scope:actor = {
+					age < 12
+				}
+				scope:recipient = {
+					age > 16
+				}
+			}
+			add = -15
+		}
+
+		modifier = { #Illegitimacy modifier.
+			desc = offer_vassalization_interaction_aibehavior_illegitimate_tt
+			trigger = {
+				OR = {
+					AND = {
+						scope:actor = {
+							has_trait = bastard
+						}
+						scope:recipient = {
+							faith = { NOT = { has_doctrine = doctrine_bastardry_none } }
+						}
+					}
+					has_trait = denounced
+					has_trait = disinherited
+				}
+			}
+			add = 10
+		}
+
+		modifier = { #Claimant modifier.
+			desc = offer_vassalization_interaction_aibehavior_claimant_tt
+			trigger = {
+				scope:actor.primary_title = {
+					scope:recipient = {
+						has_claim_on = prev
+					}
+				}
+			}
+			add = -10
+		}
+
+		#OPINION INFLUENCE
+		modifier = { #Dread level 1
+			add = 10
+			scope:recipient = {
+				has_dread_level_towards = {
+					target = scope:actor
+					level = 1
+				}
+			}
+			desc = INTIMIDATED_REASON
+		}
+
+		modifier = { #Dread level 2
+			add = 15
+			scope:recipient = {
+				has_dread_level_towards = {
+					target = scope:actor
+					level = 2
+				}
+			}
+			desc = COWED_REASON
+		}
+		
+		# Legacies are more likely to accept
+		modifier = {
+			desc = legacy_status_tt
+			trigger = {
+				NOT = {
+					scope:recipient = {
+						has_trait = supernatural_hunter
+					}
+				}
+			}
+			add = {
+				value = 0
+				if = {
+					limit = {
+						scope:recipient.father = { #Is father a Hunter?
+							has_trait = supernatural_hunter
+						}
+					}
+					add = 10
+				}
+				if = {
+					limit = {
+						scope:recipient.mother = { #Is mother a Hunter?
+							has_trait = supernatural_hunter
+						}
+					}
+					add = 10
+				}
+				if = {
+					limit = {
+						scope:recipient.father.father = { #Is grand-father a Hunter?
+							has_trait = supernatural_hunter
+						}
+					}
+					add = 5
+				}
+				if = {
+					limit = {
+						scope:recipient.father.mother = {
+							has_trait = supernatural_hunter
+						}
+					}
+					add = 5
+				}
+				if = {
+					limit = {
+						scope:recipient.mother.father = { #Is grand-father a Hunter?
+							has_trait = supernatural_hunter
+						}
+					}
+					add = 5
+				}
+				if = {
+					limit = {
+						scope:recipient.mother.mother = {
+							has_trait = supernatural_hunter
+						}
+					}
+					add = 5
+				}
+			}
+		}
+
+		# Health is a one of the most important factors (that and opinion/trust)
+		modifier = {
+			desc = health_status_tt
+			add = {
+				value = health
+				subtract = { value = 4.5 }  # Baseline adjustment to normalize the range
+				multiply = { value = -10 }  # Adjust to match the desired range
+				min = -30 # Ensure the value stays within the bounds of -30 to +30
+				max = 30
+			}
+		}
+
+		opinion_modifier = { #Compare Opinion modifier.
+			who = scope:recipient
+			opinion_target = scope:actor
+			multiplier = 0.65
+		}
+	}
+
+	on_accept = {
+		scope:recipient = {
+			show_as_tooltip = {
+				custom_tooltip = spn_msg_tooltip_confer_hunter_desc
+				custom_tooltip = spn_msg_tooltip_hunter_desc
+			}
+			
+			trigger_event = {
+				id = spn_train_hunter.0001
+				days = 1
+			}
+		}
+		
+		scope:actor = {
+			trigger_event = {
+				id = spn_train_hunter.0005
+				days = 1
+			}
+		}
+
+		save_scope_as = target
+	}
+
+	auto_accept = {
+		custom_description = {
+			text = "spending_hook"
+			subject = scope:actor
+			object = scope:recipient
+			scope:hook = yes
+		}
+	}
+
+	send_option = {
+		is_valid = {
+			scope:actor = {
+				has_usable_hook = scope:recipient
+			}
+		}
+		flag = hook
+		localization = GENERIC_SPEND_A_HOOK
+	}
+	should_use_extra_icon = {
+		scope:actor = { has_usable_hook = scope:recipient }
+	}
+	extra_icon = "gfx/interface/icons/character_interactions/hook_icon.dds"
+	send_options_exclusive = no
+
+	ai_potential = {
+		is_adult = yes
+		is_ruler = yes
+		highest_held_title_tier >= tier_county
+		has_trait = supernatural_hunter
+		OR = {
+			has_game_rule = spn_yes_ai_can_confer
+			has_game_rule = spn_only_hunter_ai_can_confer
+			has_game_rule = spn_non_hybrid_ai_can_confer
+		}
+	}
+	
+	ai_will_do = {
+		base = -10
+
+		modifier = { #AI only sends if opinion over 30
+			trigger = {
+				scope:actor = {
+					opinion = {
+						target = scope:recipient
+						value >= 40
+					}
+				}
+			}
+			add = 15
+		}
+
+		modifier = { #AI only sends if opinion less than 30
+			trigger = {
+				scope:actor = {
+					opinion = {
+						target = scope:recipient
+						value < 40
+					}
+				}
+			}
+			add = -100
+		}
+
+		modifier = { #Friend modifier.
+			trigger = {
+				scope:recipient = {
+					has_relation_friend = scope:actor
+					NOT = { has_relation_best_friend = scope:actor }
+				}
+			}
+			add = 5
+		}
+
+		modifier = { #Best Friend modifier.
+			trigger = {
+				scope:recipient = {
+					has_relation_best_friend = scope:actor
+				}
+			}
+			add = 10
+		}
+
+		modifier = { #Is a child of actor
+			trigger = {
+				scope:recipient = {
+					is_child_of = scope:actor
+				}
+			}
+			add = 50
+		}
+
+		modifier = { #Is a close family member of actor
+			trigger = {
+				scope:recipient = {
+					NOT = { is_child_of = scope:actor }
+					is_close_family_of = scope:actor
+				}
+			}
+			add = 15
+		}
+
+		modifier = { #Is your spouse
+			trigger = {
+				scope:recipient = {
+					is_spouse_of = scope:actor
+				}
+			}
+			add = 50
+		}
+
+		modifier = { #Same Dynasty modifier.
+			trigger = {
+				scope:recipient = {
+					dynasty = scope:actor.dynasty
+				}
+			}
+			add = 10
+		}
+	}
+}
