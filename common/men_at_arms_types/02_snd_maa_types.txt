@@ -88,7 +88,7 @@ demon_knights = {
 
 	counters = {
 		skirmishers = 1
-		polearm_infantry = 0.5
+		pikemen = 0.5
 		heavy_infantry = 0.75
 		light_cavalry = 0.75
 		archer_cavalry = 0.5
@@ -125,12 +125,12 @@ hunter_veterans = {
 		archer_cavalry = 0.25
 		archers = 0.5
 		supernatural_monster = 0.6
-		supernatural_animal = 0.8
+		supernatural_animal = 1
 	}
 	
-	buy_cost = { prestige = 150 gold = 100}
-	low_maintenance_cost = { gold = skirmisher_low_maint_cost piety = skirmisher_low_maint_cost prestige = pikemen_low_maint_cost }
-	high_maintenance_cost = { gold = skirmisher_high_maint_cost piety = skirmisher_low_maint_cost prestige = pikemen_low_maint_cost }
+	buy_cost = { gold = 100 }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost prestige = pikemen_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost prestige = pikemen_low_maint_cost }
 	
 	max_sub_regiments = -1
 	stack = 100
