@@ -110,7 +110,10 @@ hunter_veterans = {
 	icon = heavy_infantry
 
 	can_recruit = {
-		has_trait = supernatural_hunter
+		OR = {
+			has_trait = supernatural_hunter
+			has_trait = witch_hunter
+		}
 	}
 	
 	damage = 100
