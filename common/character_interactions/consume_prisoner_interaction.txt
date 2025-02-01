@@ -1,4 +1,4 @@
-consume_prisoner = {
+﻿consume_prisoner = {
 
 	is_shown = {
 		NOT = { scope:recipient = scope:actor}

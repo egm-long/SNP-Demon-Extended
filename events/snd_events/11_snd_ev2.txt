@@ -758,7 +758,7 @@ snd_ev2.10 = { # magic_ev4.10 = {
 	}
 	option = {
 		#Grand Coalition
-		name = ev4.10.0.d
+		name = snd_ev4.10.0.d
 		trigger = {
 			#OR = {
 			#	scope:recipient.highest_held_title_tier = tier_empire
@@ -785,7 +785,7 @@ snd_ev2.10 = { # magic_ev4.10 = {
 				}
 			}
 		}
-		custom_tooltip = ev4.10.0.d_ct
+		custom_tooltip = snd_ev4.10.0.d_ct
 		hidden_effect = {
 			if = {
 				limit = {
@@ -863,8 +863,8 @@ snd_ev2.10 = { # magic_ev4.10 = {
 #Grand Coalition invitation
 snd_ev2.41 = {
 	type = letter_event
-	opening = ev2.41.opening
-	desc = ev2.41.desc
+	opening = snd_ev2.41.opening
+	desc = snd_ev2.41.desc
 	sender = scope:attacker
 
 	trigger = {
@@ -877,7 +877,7 @@ snd_ev2.41 = {
 		}
 	}
 	option = {
-		name = ev2.41.0.a
+		name = snd_ev2.41.0.a
 		add_prestige = medium_prestige_gain
 		scope:war = {
 			add_attacker = ROOT
@@ -914,7 +914,7 @@ snd_ev2.41 = {
 		}
 	}
 	option = {
-		name = ev2.41.0.b
+		name = snd_ev2.41.0.b
 		ai_chance = {
 			base = 0
 			modifier = {
@@ -956,8 +956,8 @@ snd_ev2.41 = {
 }
 #Grand Coalition begins
 snd_ev2.42 = {
-	title = ev2.42.title
-	desc = ev2.42.desc
+	title = snd_ev2.42.title
+	desc = snd_ev2.42.desc
 	theme = realm
 	left_portrait = {
 		character = root
@@ -1022,11 +1022,11 @@ snd_ev2.42 = {
 #Grand Coalition ultimatum
 snd_ev2.43 = {
 	type = letter_event
-	opening = ev2.43.opening
-	desc = ev2.43.desc
+	opening = snd_ev2.43.opening
+	desc = snd_ev2.43.desc
 	sender = scope:actor
 	option = {
-		name = ev2.43.0.c
+		name = snd_ev2.43.0.c
 		trigger = {
 			OR = {
 				has_trait = wrathful
@@ -1034,7 +1034,7 @@ snd_ev2.43 = {
 			}
 		}
 		add_prestige = minor_prestige_gain
-		custom_tooltip = ev2.43.0.a_ct
+		custom_tooltip = snd_ev2.43.0.a_ct
 		hidden_effect = {
 			scope:actor = {
 				trigger_event = {
@@ -1048,8 +1048,8 @@ snd_ev2.43 = {
 		}
 	}
 	option = {
-		name = ev2.43.0.a
-		custom_tooltip = ev2.43.0.a_ct
+		name = snd_ev2.43.0.a
+		custom_tooltip = snd_ev2.43.0.a_ct
 		hidden_effect = {
 			scope:actor = {
 				trigger_event = {
@@ -1063,11 +1063,11 @@ snd_ev2.43 = {
 		}
 	}
 	option = {
-		name = ev2.43.0.b
+		name = snd_ev2.43.0.b
 		add_stress = minor_stress_gain
 		scope:actor = {
 			send_interface_toast = {
-				title = ev2.43.0.b_title
+				title = snd_ev2.43.0.b_title
 				imprison = {
 					target = ROOT
 					type = dungeon
@@ -1082,8 +1082,8 @@ snd_ev2.43 = {
 
 #Grand Coalition preparations
 snd_ev2.44 = {
-	title = ev2.42.title
-	desc = ev2.44.desc
+	title = snd_ev2.42.title
+	desc = snd_ev2.44.desc
 	theme = realm
 	left_portrait = {
 		character = root
@@ -1106,7 +1106,7 @@ snd_ev2.44 = {
 		}
 	}
 	option = {
-		name = ev2.44.0.a
+		name = snd_ev2.44.0.a
 		if = {
 			limit = {
 				is_ai = no
@@ -1149,7 +1149,7 @@ snd_ev2.44 = {
 		}
 	}
 	option = {
-		name = ev2.44.0.b
+		name = snd_ev2.44.0.b
 		ai_chance = {
 			base = 0
 		}
@@ -1164,8 +1164,8 @@ snd_ev2.44 = {
 
 #Grand Coalition - may strike
 snd_ev2.45 = {
-	title = ev2.42.title
-	desc = ev2.45.desc
+	title = snd_ev2.42.title
+	desc = snd_ev2.45.desc
 	theme = realm
 	left_portrait = {
 		character = root
@@ -1206,7 +1206,7 @@ snd_ev2.45 = {
 		}
 	}
 	option = {
-		name = ev2.45.0.a
+		name = snd_ev2.45.0.a
 		every_character_war = {
 			end_war = white_peace
 		}
@@ -1225,7 +1225,7 @@ snd_ev2.45 = {
 	}
 	option = {
 		name = ev7.96.e	 #"This is not the right time."
-		custom_tooltip = ev2.45.0.b_ct
+		custom_tooltip = snd_ev2.45.0.b_ct
 		hidden_effect = {
 			trigger_event = {
 				id = snd_ev2.45
