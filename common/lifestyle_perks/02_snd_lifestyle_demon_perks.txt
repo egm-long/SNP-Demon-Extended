@@ -9,6 +9,11 @@ minor_demon_perk = {
 	position = { 1 0 }
 	icon = node_vampire # Anpassungen Notwendig 
 
+	auto_selection_weight = 1000
+		
+	
+	
+
 	character_modifier = {
         intrigue = 3
 		stewardship = 5
@@ -26,6 +31,9 @@ minor_demon_perk = {
 		}
 		}
 	}
+	
+	
+	
 	
 
 

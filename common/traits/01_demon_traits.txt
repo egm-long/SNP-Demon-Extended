@@ -154,6 +154,8 @@
 	desc = trait_demon_desc
 }
 
+
+
 balanced_conqueror = {
 	category = fame
 	flag = conqueror_bonuses_modifier
