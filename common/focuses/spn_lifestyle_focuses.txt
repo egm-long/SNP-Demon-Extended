@@ -109,7 +109,7 @@ werewolf_lycanthropy_focus = {
 	}
 
 	auto_selection_weight = {
-		value = 11
+		value = 11000
 		if = {
 			limit = {
 				has_werewolf_interest_trigger = yes
@@ -263,7 +263,7 @@ hunter_monster_hunter_focus = {
 	}
 
 	auto_selection_weight = {
-		value = 11
+		value = 110000
 		if = {
 			limit = {
 				has_hunter_interest_trigger = yes
@@ -297,7 +297,7 @@ hunter_witch_hunter_focus = {
 	}
 
 	auto_selection_weight = {
-		value = 11
+		value = 110000
 		if = {
 			limit = {
 				has_hunter_interest_trigger = yes
