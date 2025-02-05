@@ -5,9 +5,11 @@ snd_initiate_events.1001 { #Initiate demon
 
 	trigger = {
 		AND = {
-			spn_has_supernatural_trait = no
+			#pn_has_supernatural_trait = no
 			spn_has_hunter_trait = no
 			NOR = {
+				has_trait = supernatural_hybrid
+				has_trait = supernatural_vampire
 				has_trait = demon
 				has_trait = demon0
 			}

@@ -36,10 +36,13 @@
 	is_shown = {
 		NOT = { scope:recipient = scope:actor}
 		scope:recipient = {
-			spn_has_supernatural_trait = no
+			#spn_has_supernatural_trait = no
 			NOR = {
 				#spn_has_supernatural_trait = yes
 				#has_trait = demon
+				has_trait = witch_hunter
+				has_trait = supernatural_hybrid
+				has_trait = supernatural_vampire
 				has_trait = demon0
 				has_trait = supernatural_hunter
 			}
